@@ -1,0 +1,14 @@
+.Button {
+  padding: 6px 12px;
+  color: var(--text-100);
+  border: none;
+  border-radius: 6px;
+}
+
+.primary {
+  background: var(--primary-100);
+}
+
+.secondary {
+  background: var(--primary-200);
+}

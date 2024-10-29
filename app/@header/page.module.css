@@ -1,0 +1,12 @@
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.pageTitle {
+  font-size: 24px;
+  letter-spacing: 2px;
+  font-family: 'Lobster Two', cursive;
+}
