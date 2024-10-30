@@ -1,5 +1,6 @@
+import Button from "@/src/components/interactive/button";
+
 import classes from './page.module.css';
-import Button from "@/src/components/button";
 
 const Header = () => {
   return (
@@ -7,7 +8,10 @@ const Header = () => {
       <h1 className={classes.pageTitle}>Jake History</h1>
 
       <div>
-        <Button>Create New History</Button>
+        <span>검색</span>
+        <Button type="default">
+          Create New History
+        </Button>
       </div>
     </header>
   );

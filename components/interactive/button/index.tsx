@@ -3,7 +3,7 @@ import React from "react";
 import classes from './button.module.css';
 
 type Props = {
-  type?: 'primary' | 'secondary';
+  type?: 'primary' | 'secondary' | 'default';
   children: React.ReactNode;
 }
 
@@ -13,6 +13,8 @@ const getClassNameByType = (type: string) => {
       return classes.primary;
     case 'secondary':
       return classes.secondary;
+    case 'default':
+      return classes.default;
     // no default
   }
 }

@@ -1,0 +1,18 @@
+.Home {
+  max-width: 1200px;
+  padding: 36px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 24px;
+}
+
+@media (min-width: 1600px) {
+  .Home {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1600px;
+    gap: 36px;
+  }
+}

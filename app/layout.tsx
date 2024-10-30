@@ -5,9 +5,9 @@ import "./globals.css";
 import React from "react";
 
 const merriweather = Merriweather({
-  subsets: ['latin'], // 폰트 서브셋 선택
-  weight: ['400', '700'], // 원하는 폰트 굵기 설정
-  display: 'swap' // FOUT(Fallback on unstyled text)을 최소화하기 위해 `swap` 권장
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap'
 });
 
 export const metadata: Metadata = {
@@ -32,6 +32,7 @@ export default function RootLayout({
       </head>
       <body className={`${merriweather.className}`}>
         {header}
+        <div style={{ height: 1, width: '100svw', background: '#9e9e9e' }} />
         {children}
       </body>
     </html>
