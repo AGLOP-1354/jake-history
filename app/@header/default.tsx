@@ -1,6 +1,7 @@
 import Button from "@/src/components/interactive/button";
 
 import classes from './page.module.css';
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -9,9 +10,12 @@ const Header = () => {
 
       <div>
         <span>검색</span>
-        <Button type="default">
-          Create New History
-        </Button>
+
+        <Link href="/history/create">
+          <Button type="default">
+            Create New History
+          </Button>
+        </Link>
       </div>
     </header>
   );

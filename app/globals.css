@@ -12,6 +12,7 @@
 
   color: var(--text-100);
   background: var(--bg-100);
+  box-sizing: border-box;
 }
 
 body {

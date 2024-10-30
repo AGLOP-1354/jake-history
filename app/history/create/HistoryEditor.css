@@ -1,0 +1,41 @@
+.editorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+  max-height: calc(100vh - 69.5px);
+  overflow: hidden;
+}
+
+.preview {
+  flex: 1;
+  height: 100%;
+  max-height: calc(100vh - 69.5px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.storyTitleInput {
+  font-size: 36px;
+  background: transparent;
+  border: none;
+  padding: 24px;
+  caret-color: var(--text-200);
+  color: var(--text-100);
+}
+
+.storyTitleInput:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.eidtor {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
