@@ -31,8 +31,8 @@ export default function RootLayout({
         <title>jake history</title>
       </head>
       <body className={`${merriweather.className}`}>
-        {header}
-        <div style={{ height: 1, width: '100svw', background: '#9e9e9e' }} />
+        {/*{header}*/}
+        {/*<div style={{ height: 1, width: '100svw', background: '#9e9e9e' }} />*/}
         {children}
       </body>
     </html>

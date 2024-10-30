@@ -9,5 +9,18 @@
   max-height: calc(100vh - 69.5px);
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 12px
+  padding: 36px 48px;
+}
+
+.ck.ck-toolbar__items {
+  gap: 8px;
+}
+
+.ck.ck-toolbar__items * {
+  color: var(--text-100) !important;
+  font-size: 14px !important;
+}
+
+.ck.ck-balloon-panel.ck-powered-by-balloon .ck.ck-powered-by {
+  display: none !important;
 }
