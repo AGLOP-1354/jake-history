@@ -13,7 +13,7 @@
   font-weight: bold;
   background: transparent;
   border: none;
-  padding: 36px 48px 0;
+  padding: 36px 42px 0;
   caret-color: var(--text-200);
   color: var(--text-100);
 }
@@ -29,4 +29,17 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.historyHandler {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--bg-200);
+}
+
+.prevButton {
+  color: var(--text-100);
+  text-decoration: none;
 }

@@ -15,10 +15,13 @@
     "ckeditor5": "^43.3.0",
     "ckeditor5-custom-build": "^0.0.6",
     "ckeditor5-premium-features": "^43.3.0",
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.8.0",
     "next": "15.0.2",
     "prismjs": "^1.29.0",
     "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028"
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "uuid": "^11.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",

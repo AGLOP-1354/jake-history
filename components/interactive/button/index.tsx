@@ -4,6 +4,7 @@ import classes from './button.module.css';
 
 type Props = {
   type?: 'primary' | 'secondary' | 'default';
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
@@ -21,12 +22,13 @@ const getClassNameByType = (type: string) => {
 
 const Button = ({
   type = 'primary',
+  onClick,
   children,
 }: Props) => {
   const classNameByType = getClassNameByType(type);
 
   return (
-    <button className={`${classes.Button} ${classNameByType}`}>
+    <button className={`${classes.Button} ${classNameByType}`} onClick={onClick}>
       {children}
     </button>
   )
