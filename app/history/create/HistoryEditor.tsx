@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import Editor from '@/src/components/editor';
+import Preview from "@/src/components/preview";
+
 import './HistoryEditor.css';
 
 const HistoryEditor = () => {
@@ -14,15 +16,13 @@ const HistoryEditor = () => {
           type="text"
           value={storyTitle}
           onChange={(e) => setStoryTitle(e.target.value)}
-          placeholder="스토리의 제목을 적어주세요."
+          placeholder="제목을 적어주세요."
           className="storyTitleInput"
         />
         <Editor content={content} onChange={setContent} />
       </div>
 
-      <div className="preview">
-        <span dangerouslySetInnerHTML={{ __html: content }} />
-      </div>
+      <Preview content={content} storyTitle={storyTitle} />
     </div>
   );
 }

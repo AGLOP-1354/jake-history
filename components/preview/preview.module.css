@@ -1,62 +1,57 @@
-.ck > * {
-  background: transparent !important;
-  border: none !important;
-}
-
-.ck.ck-reset.ck-editor.ck-rounded-corners {
+.preview {
   flex: 1;
   height: 100%;
-  max-height: calc(100vh - 69.5px);
+  max-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 36px 48px;
+  box-sizing: border-box;
+  background: var(--bg-400);
 }
 
-.ck.ck-toolbar__items {
-  gap: 8px;
+.storyTitle {
+  font-size: 36px !important;
+  font-weight: bold;
+  margin-bottom: 48px !important;
 }
 
-.ck.ck-toolbar__items * {
-  color: var(--text-100) !important;
-  font-size: 12px !important;
+.preview pre {
+  background: rgba(69, 69, 69, 0.2);;
+  padding: 16px;
+  border-radius: 8px;
 }
-
-.ck.ck-balloon-panel.ck-powered-by-balloon .ck.ck-powered-by {
-  display: none !important;
-}
-
 
 /* Bold */
-.ck-content b,
-.ck-content strong {
+.preview b,
+.preview strong {
   font-weight: bold;
 }
 
 /* Italic */
-.ck-content i,
-.ck-content em {
+.preview i,
+.preview em {
   font-style: italic;
 }
 
 /* Underline */
-.ck-content u {
+.preview u {
   text-decoration: underline;
 }
 
 /* Strikethrough */
-.ck-content s,
-.ck-content strike {
+.preview s,
+.preview strike {
   text-decoration: line-through;
 }
 
 /* Link */
-.ck-content a {
+.preview a {
   color: #0645ad;
   text-decoration: underline;
 }
 
 /* Blockquote */
-.ck-content blockquote {
+.preview blockquote {
   border-left: 4px solid #ccc;
   margin: 1em;
   padding-left: 1em;
@@ -66,76 +61,68 @@
 }
 
 /* Heading */
-.ck-content h1 {
+.preview h1 {
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
-.ck-content h2 {
+.preview h2 {
   font-size: 1.75em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
-.ck-content h3 {
+.preview h3 {
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
-.ck-content h4 {
+.preview h4 {
   font-size: 1.25em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
-.ck-content h5 {
+.preview h5 {
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
-.ck-content h6 {
+.preview h6 {
   font-size: 0.875em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
-/* Inline Code */
-.ck-content code {
-  background-color: #f4f4f4;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  font-family: monospace;
-}
-
 /* Unordered List (ul) */
-.ck-content ul {
+.preview ul {
   list-style-type: disc; /* 기본 불릿 스타일 */
   margin: 1em 0;         /* 위아래 여백 */
   padding-left: 1.5em;   /* 왼쪽 여백 */
 }
 
 /* Ordered List (ol) */
-.ck-content ol {
+.preview ol {
   list-style-type: decimal; /* 숫자형 리스트 */
   margin: 1em 0;            /* 위아래 여백 */
   padding-left: 1.5em;      /* 왼쪽 여백 */
 }
 
 /* List Item (li) - ul과 ol의 기본 스타일 유지 */
-.ck-content ul li,
-.ck-content ol li {
+.preview ul li,
+.preview ol li {
   margin: 0.5em 0;          /* 각 리스트 아이템 간 간격 */
   line-height: 1.6;         /* 줄 간격 */
 }
 
 /* 중첩 리스트 스타일 */
-.ck-content ul ul,
-.ck-content ol ol,
-.ck-content ul ol,
-.ck-content ol ul {
+.preview ul ul,
+.preview ol ol,
+.preview ul ol,
+.preview ol ul {
   list-style-type: circle; /* 중첩된 리스트는 원형 불릿 */
   margin-left: 1.5em;      /* 추가 들여쓰기 */
 }

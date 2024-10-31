@@ -26,7 +26,7 @@ ClassicEditor.builtinPlugins = [
 ClassicEditor.defaultConfig = {
   toolbar: {
     items: [
-      'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'codeBlock', '|', 'undo', 'redo'
+      'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'codeBlock'
     ]
   },
   language: 'en',
