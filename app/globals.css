@@ -11,9 +11,23 @@
   --bg-300:#454545;
   --bg-400:  rgba(0, 0, 0, 0.1);
 
+  font-size: 16px;
   color: var(--text-100);
   background: var(--bg-100);
   box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+/* 중간 화면 (예: 태블릿) */
+@media (min-width: 600px) and (max-width: 1200px) {
+  :root {
+    font-size: 15px;
+  }
 }
 
 body {
@@ -27,3 +41,4 @@ body {
     height: 100vh;
   }
 }
+

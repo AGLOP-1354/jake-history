@@ -1,0 +1,31 @@
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-200);
+  padding: 8px;
+}
+
+.prefix {
+  font-size: 14px;
+  color: gray;
+}
+
+.Input {
+  background: transparent;
+  caret-color: var(--text-100) !important;
+  color: var(--text-100) !important;
+  border: none !important;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.Input::placeholder {
+  color: var(--text-200) !important;
+  opacity: 1;
+}
+
+.Input:focus {
+  outline: none;
+  box-shadow: none;
+}

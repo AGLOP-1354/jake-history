@@ -1,0 +1,10 @@
+.Divider {
+  width: calc(100svw - 40px);
+  height: 1px;
+  background: #E7E0E0;
+  margin: 16px 0;
+}
+
+.noMargin {
+  margin: 0;
+}

@@ -1,0 +1,36 @@
+.Textarea {
+  background: var(--bg-200);
+  padding: 8px;
+  caret-color: var(--text-100) !important;
+  color: var(--text-100) !important;
+  border: none !important;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.Textarea::placeholder {
+  color: var(--text-200) !important;
+  opacity: 1;
+}
+
+.Textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.noResize {
+  resize: none;
+}
+
+.TextareaContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.LengthIndicator {
+  font-size: 12px;
+  color: gray;
+  text-align: right;
+  margin-top: 4px;
+}

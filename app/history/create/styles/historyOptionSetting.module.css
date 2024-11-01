@@ -1,0 +1,64 @@
+.HistoryOptionSettingContainer,
+.HistoryOptionSetting {
+  display: flex;
+  align-items: center;
+}
+
+.HistoryOptionSettingContainer {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.HistoryOptionSetting {
+  height: 413px;
+}
+
+.historyPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  font-size: 24px;
+}
+
+.historyImagePreview {
+  width: 21.875rem;
+  height: 192.96px;
+  background: var(--bg-200);
+  border-radius: 4px;
+}
+
+.historyTitle {
+  font-size: 16px;
+}
+
+.historyOptions {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-between;
+  height: 100%;
+  width: 21.875rem;
+}
+
+.historyAdditionalOptionSettingSection {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.handlerButtons {
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

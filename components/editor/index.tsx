@@ -1,13 +1,13 @@
-'use client'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '../../ckeditor/dist/ckeditor';
+"use client";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "../../ckeditor/dist/ckeditor";
 
-import './editor.css';
+import "./editor.css";
 
 type Props = {
   content: string;
   onChange: (changedContent: string) => void;
-}
+};
 
 const Editor = ({ content, onChange }: Props) => {
   return (
@@ -22,7 +22,7 @@ const Editor = ({ content, onChange }: Props) => {
         onChange(data);
       }}
     />
-  )
-}
+  );
+};
 
 export default Editor;

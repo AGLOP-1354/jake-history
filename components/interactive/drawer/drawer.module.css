@@ -1,0 +1,38 @@
+.Drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-100);
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.825rem 1.25rem;
+  border-bottom: 1px solid #E7E0E0;
+}
+
+.title {
+  color: #BEA5A5;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+}
+
+.article {
+  flex: 1;
+}
+
+@supports (width: 100svw) {
+  .Drawer {
+    width: 100svw;
+    height: 100svh;
+  }
+}
