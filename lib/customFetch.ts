@@ -1,3 +1,5 @@
+import getDefaultUrl from "@/src/lib/utils/getDefaultUrl";
+
 const serializeQueryParams = (params: Record<string, string | number | boolean>) => {
   const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
@@ -7,9 +9,11 @@ const serializeQueryParams = (params: Record<string, string | number | boolean>)
 };
 
 const getFetch = async <T>(url: string, queryParams?: Record<string, string | number | boolean>): Promise<T> => {
+  const defaultUrl = getDefaultUrl();
+
   try {
     const queryString = queryParams ? `?${serializeQueryParams(queryParams)}` : "";
-    const response = await fetch(`${url}${queryString}`, {
+    const response = await fetch(`${defaultUrl}${url}${queryString}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -28,8 +32,10 @@ const getFetch = async <T>(url: string, queryParams?: Record<string, string | nu
 };
 
 const postFetch = async <T>(url: string, body: Record<string, unknown>): Promise<T> => {
+  const defaultUrl = getDefaultUrl();
+
   try {
-    const response = await fetch(url, {
+    const response = await fetch(`${defaultUrl}${url}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

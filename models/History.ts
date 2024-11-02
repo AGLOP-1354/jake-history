@@ -13,6 +13,7 @@ interface IHistory extends Document {
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
+  tags: { type: typeof mongoose.Schema.Types.ObjectId; ref: string }[];
 }
 
 const HistorySchema = new mongoose.Schema<IHistory>(
@@ -42,13 +43,10 @@ const HistorySchema = new mongoose.Schema<IHistory>(
       type: String,
       required: true,
     },
+    tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
     categoryId: {
       type: String,
       required: false,
-    },
-    tagIds: {
-      type: [String],
-      default: [],
     },
     deletedAt: {
       type: Date,

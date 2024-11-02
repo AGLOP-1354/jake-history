@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import dbConnect from "@/src/lib/mongodb";
 import History from "@/src/models/History";
+import Tag from "@/src/models/Tag";
 
 interface HistoryData {
   title: string;
@@ -23,7 +24,18 @@ export async function POST(request: Request) {
   }
 
   try {
-    const newHistory = new History({ title, content, tagIds, imageUrl, summary, categoryId, url });
+    const tags = await Tag.find({ id: { $in: tagIds } }).select("_id");
+    const tagObjectIds = tags.map((tag) => tag._id);
+
+    const newHistory = new History({
+      title,
+      content,
+      tags: tagObjectIds,
+      imageUrl,
+      summary,
+      categoryId,
+      url,
+    });
     await newHistory.save();
     return NextResponse.json({ message: "History created successfully", data: newHistory }, { status: 201 });
   } catch (error) {
@@ -36,7 +48,7 @@ export async function GET() {
   await dbConnect();
 
   try {
-    const histories = await History.find({ deletedAt: null }).sort({ createdAt: -1 });
+    const histories = await History.find({ deletedAt: null }).populate("tags").sort({ updatedAt: -1 });
     return NextResponse.json(histories, { status: 200 });
   } catch (error) {
     console.error("Error fetching histories:", error);

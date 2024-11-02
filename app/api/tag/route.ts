@@ -29,7 +29,7 @@ export async function GET() {
   await dbConnect();
 
   try {
-    const tags = await Tag.find({ deletedAt: null }).sort({ createdAt: -1 });
+    const tags = await Tag.findOne({ deletedAt: null }).sort({ createdAt: -1 });
     return NextResponse.json(tags, { status: 200 });
   } catch (error) {
     console.error("Error fetching tags:", error);

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -7,8 +7,9 @@ import Editor from "@/src/components/editor";
 import Preview from "@/src/components/preview";
 import Button from "@/src/components/interactive/button";
 import Drawer from "@/src/components/interactive/drawer";
-import { postFetch } from "@/src/lib/customFetch";
+import { getFetch, postFetch } from "@/src/lib/customFetch";
 import uploadS3Image from "@/src/lib/actions/uploadS3Image";
+import { TagType } from "@/src/lib/types/tag";
 
 import HistoryOptionSetting from "./HistoryOptionSetting";
 import type { HistoryOptionsType } from "./HistoryOptionSetting";
@@ -25,11 +26,10 @@ const HistoryEditor = () => {
     summary: "",
     url: "",
     categoryId: "",
-    tagIds: [],
+    tagNames: [],
   });
   const [isHistoryOptionsSettingDrawerOpened, setIsHistoryOptionsSettingDrawerOpened] = useState(false);
 
-  console.log("historyOptions", historyOptions);
   const onChangeHistoryOptions = (changedOptions: HistoryOptionsType) => {
     setHistoryOptions((prevHistoryOptions) => ({
       ...prevHistoryOptions,
@@ -54,15 +54,56 @@ const HistoryEditor = () => {
   };
   const onCloseHistoryOptionsSettingDrawer = () => setIsHistoryOptionsSettingDrawerOpened(false);
 
+  const createTagList = async () => {
+    try {
+      const createdTagList: { data?: TagType[] } = await postFetch("/api/tag/list", {
+        tagNames: historyOptions.tagNames,
+      });
+
+      if (!createdTagList?.data || !createdTagList.data.length) {
+        alert("태그 리스트 생성에 실패했어요");
+        return;
+      }
+
+      return createdTagList.data.map(({ id }) => id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const validateUrl = async () => {
+    if (!historyOptions.url) {
+      alert("URL을 입력해주세요.");
+      return false;
+    }
+
+    const isDuplicateHistory = await getFetch("/api/history/one/validate-url", { url: historyOptions?.url });
+    if (isDuplicateHistory) {
+      alert("이미 존재하는 URL이 있어요. 다른 URL로 수정해주세요.");
+      return false;
+    }
+
+    return true;
+  };
+
   const onSaveHistory = async () => {
     try {
+      const isValidUrl = await validateUrl();
+      if (!isValidUrl) return;
+
       let imageUrl = "";
+      let tagIds;
+
+      if (historyOptions.tagNames && historyOptions.tagNames.length > 0) {
+        const _tagIds = await createTagList();
+        if (!_tagIds || _tagIds.length === 0) return;
+
+        tagIds = _tagIds;
+      }
 
       if (historyOptions.file) {
         const _imageUrl = await uploadS3Image(historyOptions.file);
-        if (!_imageUrl) {
-          throw new Error("이미지 업로드에 실패했습니다.");
-        }
+        if (!_imageUrl) return;
 
         imageUrl = _imageUrl;
       }
@@ -70,8 +111,9 @@ const HistoryEditor = () => {
       await postFetch("/api/history", {
         title: storyTitle,
         content,
-        ...historyOptions,
+        tagIds,
         imageUrl,
+        ...historyOptions,
       });
 
       alert("히스토리가 등록되었습니다.");

@@ -14,7 +14,7 @@ export type HistoryOptionsType = {
   summary?: string;
   url?: string;
   categoryId?: string;
-  tagIds?: string[];
+  tagNames?: string[];
 };
 
 type Props = {
@@ -26,18 +26,18 @@ type Props = {
 };
 
 const HistoryOptionSetting = ({ historyTitle, onCancel, onSubmit, historyOptions, onChangeHistoryOptions }: Props) => {
-  const { summary = "", url = "", categoryId = "", tagIds = [] } = historyOptions;
+  const { summary = "", url = "", categoryId = "", tagNames = [] } = historyOptions;
 
   const addTag = (newTagName: string) => {
     onChangeHistoryOptions({
-      tagIds: [...tagIds, newTagName],
+      tagNames: [...tagNames, newTagName],
     });
   };
 
   const removeTag = (tagName: string) => {
-    const removedTagList = tagIds.filter((tag) => tag !== tagName);
+    const removedTagList = tagNames.filter((tag) => tag !== tagName);
     onChangeHistoryOptions({
-      tagIds: removedTagList,
+      tagNames: removedTagList,
     });
   };
 
@@ -91,7 +91,7 @@ const HistoryOptionSetting = ({ historyTitle, onCancel, onSubmit, historyOptions
 
             <div className={classes.container}>
               <h3 className={classes.title}>태그 설정</h3>
-              <TagCreateInput tagList={tagIds} addTag={addTag} removeTag={removeTag} />
+              <TagCreateInput tagList={tagNames} addTag={addTag} removeTag={removeTag} />
             </div>
           </div>
 
