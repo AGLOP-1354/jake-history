@@ -1,21 +1,21 @@
 "use client";
 
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 
 import classes from "./input.module.css";
 
-type Props = {
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  prefix?: string;
+  prefix?: string | React.ReactNode;
   placeholder?: string;
 };
 
-const Input = ({ value, onChange, placeholder, prefix }: Props) => {
+const Input = ({ value, onChange, placeholder, prefix, ...acc }: Props) => {
   return (
     <div className={classes.inputContainer}>
       {!!prefix && <span className={classes.prefix}>{prefix}</span>}
-      <input value={value} onChange={onChange} placeholder={placeholder} className={classes.Input} />
+      <input value={value} onChange={onChange} placeholder={placeholder} className={classes.Input} {...acc} />
     </div>
   );
 };

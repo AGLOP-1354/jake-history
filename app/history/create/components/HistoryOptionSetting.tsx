@@ -6,13 +6,15 @@ import Input from "@/src/components/interactive/input";
 import Textarea from "@/src/components/interactive/textarea";
 
 import classes from "../styles/historyOptionSetting.module.css";
+import FileUpload from "@/src/components/interactive/fileUpload";
+import TagCreateInput from "@/src/components/tag/TagCreateInput";
 
 export type HistoryOptionsType = {
-  image?: string;
+  file?: File | null;
   summary?: string;
   url?: string;
-  category?: string;
-  tagList?: string[];
+  categoryId?: string;
+  tagIds?: string[];
 };
 
 type Props = {
@@ -24,7 +26,26 @@ type Props = {
 };
 
 const HistoryOptionSetting = ({ historyTitle, onCancel, onSubmit, historyOptions, onChangeHistoryOptions }: Props) => {
-  const { image = "", summary = "", url = "", category = "", tagList = [] } = historyOptions;
+  const { summary = "", url = "", categoryId = "", tagIds = [] } = historyOptions;
+
+  const addTag = (newTagName: string) => {
+    onChangeHistoryOptions({
+      tagIds: [...tagIds, newTagName],
+    });
+  };
+
+  const removeTag = (tagName: string) => {
+    const removedTagList = tagIds.filter((tag) => tag !== tagName);
+    onChangeHistoryOptions({
+      tagIds: removedTagList,
+    });
+  };
+
+  const onFileSelect = (_file: File) => {
+    onChangeHistoryOptions({
+      file: _file,
+    });
+  };
 
   return (
     <div className={classes.HistoryOptionSettingContainer}>
@@ -32,7 +53,9 @@ const HistoryOptionSetting = ({ historyTitle, onCancel, onSubmit, historyOptions
         <div className={classes.historyPreview}>
           <div className={classes.container}>
             <h3 className={classes.title}>히스토리 미리보기</h3>
-            <div className={classes.historyImagePreview}>이미지 업로드 섹션</div>
+            <div className={classes.historyImagePreview}>
+              <FileUpload onFileSelect={onFileSelect} />
+            </div>
           </div>
 
           <div className={classes.container}>
@@ -64,6 +87,11 @@ const HistoryOptionSetting = ({ historyTitle, onCancel, onSubmit, historyOptions
             <div className={classes.container}>
               <h3 className={classes.title}>카테고리 설정</h3>
               <div>카테고리 추가</div>
+            </div>
+
+            <div className={classes.container}>
+              <h3 className={classes.title}>태그 설정</h3>
+              <TagCreateInput tagList={tagIds} addTag={addTag} removeTag={removeTag} />
             </div>
           </div>
 

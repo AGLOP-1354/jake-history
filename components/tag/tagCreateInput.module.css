@@ -1,0 +1,20 @@
+.TagCreateInput {
+
+}
+
+.tagPreview {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  padding: 4px 8px;
+  background: var(--primary-200);
+  border-radius: 50px;
+}
