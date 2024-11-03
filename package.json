@@ -14,6 +14,7 @@
     "@ckeditor/ckeditor5-dev-utils": "^43.0.0",
     "@ckeditor/ckeditor5-react": "^9.3.1",
     "@tabler/icons-react": "^3.21.0",
+    "@tanstack/react-query": "^5.59.17",
     "aws-sdk": "^2.1691.0",
     "ckeditor5": "^43.3.0",
     "ckeditor5-custom-build": "^0.0.6",

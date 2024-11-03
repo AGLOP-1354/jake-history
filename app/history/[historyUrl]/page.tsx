@@ -54,7 +54,7 @@ const HistoryDetail = async ({ params }: Props) => {
       <div className={classes.content}>
         {!!imageUrl && (
           <div className={classes.historyDetailImage}>
-            <Image src={imageUrl} alt={`${title}-image`} fill quality={100} />
+            <Image className={classes.image} src={imageUrl} alt={`${title}-image`} fill quality={100} />
           </div>
         )}
 

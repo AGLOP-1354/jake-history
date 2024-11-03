@@ -1,13 +1,15 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Merriweather } from "next/font/google";
 
+import ReactQueryProvider from "@/src/provider/ReactQueryProvider";
+
 import "./globals.css";
-import React from "react";
 
 const merriweather = Merriweather({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  display: 'swap'
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -18,12 +20,9 @@ export const metadata: Metadata = {
 type Props = {
   children: React.ReactNode;
   header: React.ReactNode;
-}
+};
 
-export default function RootLayout({
-  children,
-  header,
-}: Readonly<Props>) {
+export default function RootLayout({ children, header }: Readonly<Props>) {
   return (
     <html lang="en">
       <head>
@@ -31,8 +30,10 @@ export default function RootLayout({
         <title>jake history</title>
       </head>
       <body className={`${merriweather.className}`}>
-        {header}
-        {children}
+        <ReactQueryProvider>
+          {header}
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );

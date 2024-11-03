@@ -4,4 +4,5 @@ export type TagType = {
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
+  historyCount?: number;
 };

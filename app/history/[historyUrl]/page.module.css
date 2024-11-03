@@ -53,6 +53,11 @@
   margin: 0 1.5rem 3rem;
 }
 
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
 .historyTags {
   display: flex;
   align-items: center;
@@ -61,8 +66,8 @@
 
 .historyTag {
   font-size: 12px;
-  padding: 6px;
-  background: var(--primary-200);
+  padding: 6px 12px;
+  background: var(--bg-300);
   border-radius: 50px;
-  color: var(--text-100);
+  color: var(--primary-200);
 }

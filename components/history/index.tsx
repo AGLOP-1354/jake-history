@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import dayjs from "dayjs";
+import { IconPhotoScan } from "@tabler/icons-react";
 
 import { HistoryType } from "@/src/lib/types/history";
 
@@ -20,7 +21,14 @@ const History = ({
     <div className={classes.History}>
       <Link href={`/history/${url}`} className={classes.link}>
         <div className={classes.historyImage}>
-          {imageUrl && <Image quality={100} src={imageUrl} alt={`${title} 이미지`} fill className={classes.image} />}
+          {imageUrl ? (
+            <Image quality={100} src={imageUrl} alt={`${title} 이미지`} fill className={classes.image} />
+          ) : (
+            <div className={classes.noHistoryImage}>
+              <IconPhotoScan width={128} height={128} />
+              <span>이미지가 없어요.</span>
+            </div>
+          )}
         </div>
 
         <div className={classes.historyContentWrapper}>

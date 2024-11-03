@@ -44,11 +44,21 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   await dbConnect();
 
+  const { searchParams } = new URL(request.url);
+  const tagName = searchParams.get("tag");
+
   try {
-    const histories = await History.find({ deletedAt: null }).populate("tags").sort({ updatedAt: -1 });
+    let tag = null;
+    if (tagName) {
+      tag = await Tag.findOne({ name: tagName });
+    }
+
+    const histories = await History.find({ deletedAt: null, ...(tag ? { tags: { $in: [tag?._id] } } : {}) })
+      .populate("tags")
+      .sort({ updatedAt: -1 });
     return NextResponse.json(histories, { status: 200 });
   } catch (error) {
     console.error("Error fetching histories:", error);

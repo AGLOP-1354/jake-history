@@ -15,6 +15,7 @@
   gap: 4px;
   font-size: 12px;
   padding: 4px 8px;
-  background: var(--primary-200);
+  background: var(--bg-300);
   border-radius: 50px;
+  color: var(--primary-200);
 }
