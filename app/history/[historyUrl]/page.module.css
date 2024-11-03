@@ -1,0 +1,68 @@
+.HistoryDetail {
+  width: 100%;
+  max-width: 42.67rem;
+  margin: 88px auto;
+  min-height: calc(100vh - 70px - 88px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.historyDetailSubHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.historyDetailHandler {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-200);
+}
+
+.historyDetailHandler a {
+  text-decoration: none;
+  color: var(--text-200);
+}
+
+.historyDetailHandler * {
+  cursor: pointer;
+}
+
+.historyDetailUpdatedAt {
+  font-size: 0.875rem;
+  color: var(--text-200);
+}
+
+.historyTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.content {
+  flex: 1;
+}
+
+.historyDetailImage {
+  position: relative;
+  width: calc(100% - 3rem);
+  height: 349.93px;
+  margin: 0 1.5rem 3rem;
+}
+
+.historyTags {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.historyTag {
+  font-size: 12px;
+  padding: 6px;
+  background: var(--primary-200);
+  border-radius: 50px;
+  color: var(--text-100);
+}

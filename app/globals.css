@@ -6,6 +6,7 @@
   --accent-200:#e1ffff;
   --text-100:#FFFFFF;
   --text-200:#9e9e9e;
+  --bg-black: #000000;
   --bg-100:#1E1E1E;
   --bg-200:#2d2d2d;
   --bg-300:#454545;
@@ -22,12 +23,18 @@
   }
 }
 
-/* 중간 화면 (예: 태블릿) */
 @media (min-width: 600px) and (max-width: 1200px) {
   :root {
     font-size: 15px;
   }
 }
+
+@media (min-width: 1200px){
+  :root {
+    font-size: 18px;
+  }
+}
+
 
 * {
   box-sizing: border-box;
@@ -36,6 +43,10 @@
 body {
   width: 100vw;
   height: 100vh;
+}
+
+pre {
+  padding: 0 !important;
 }
 
 @supports (width: 100svw) {

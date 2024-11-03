@@ -1,15 +1,20 @@
-// src/app/api/history/[id]/route.ts
-import dbConnect from "@/src/lib/mongodb";
-import History from "@/src/models/History";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+import dbConnect from "@/src/lib/mongodb";
+import History from "@/src/models/History";
+
+export async function GET(request: Request) {
   await dbConnect();
 
-  const { id } = params;
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get("url");
+
+  if (!url) {
+    return NextResponse.json({ message: "Url is Required" }, { status: 404 });
+  }
 
   try {
-    const history = await History.findOne({ id, deletedAt: null });
+    const history = await History.findOne({ url: decodeURIComponent(url), deletedAt: null }).populate("tags");
 
     if (!history) {
       return NextResponse.json({ message: "History not found" }, { status: 404 });

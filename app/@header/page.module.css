@@ -12,3 +12,8 @@
   letter-spacing: 2px;
   font-family: 'Lobster Two', cursive;
 }
+
+.link {
+  text-decoration: none;
+  color: unset;
+}

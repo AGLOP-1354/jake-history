@@ -4,10 +4,10 @@ import Button from "@/src/components/interactive/button";
 import VerticalDivider from "@/src/components/display/divider/VerticalDivider";
 import Input from "@/src/components/interactive/input";
 import Textarea from "@/src/components/interactive/textarea";
-
-import classes from "../styles/historyOptionSetting.module.css";
 import FileUpload from "@/src/components/interactive/fileUpload";
 import TagCreateInput from "@/src/components/tag/TagCreateInput";
+
+import classes from "../styles/historyOptionSetting.module.css";
 
 export type HistoryOptionsType = {
   file?: File | null;
