@@ -2,6 +2,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { IconSearch } from "@tabler/icons-react";
 
 import Button from "@/src/components/interactive/button";
 
@@ -20,11 +21,13 @@ const Header = () => {
         <h1 className={classes.pageTitle}>Jake History</h1>
       </Link>
 
-      <div>
-        <span>검색</span>
+      <div className={classes.headerRightItems}>
+        <IconSearch className={classes.searchIcon} onClick={() => console.log("a")} width={20} height={20} />
 
         <Link href="/history/create">
-          <Button type="default">Create New History</Button>
+          <Button type="default" style={{ border: "2px solid var(--text-200)" }}>
+            Create New History
+          </Button>
         </Link>
       </div>
     </header>

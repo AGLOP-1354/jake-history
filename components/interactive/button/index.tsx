@@ -1,37 +1,36 @@
 import React from "react";
 
-import classes from './button.module.css';
+import classes from "./button.module.css";
 
 type Props = {
-  type?: 'primary' | 'secondary' | 'default';
+  type?: "primary" | "secondary" | "default";
   onClick?: () => void;
+  style?: {
+    [styleName: string]: any;
+  };
   children: React.ReactNode;
-}
+};
 
 const getClassNameByType = (type: string) => {
   switch (type) {
-    case 'primary':
+    case "primary":
       return classes.primary;
-    case 'secondary':
+    case "secondary":
       return classes.secondary;
-    case 'default':
+    case "default":
       return classes.default;
     // no default
   }
-}
+};
 
-const Button = ({
-  type = 'primary',
-  onClick,
-  children,
-}: Props) => {
+const Button = ({ type = "primary", onClick, style, children }: Props) => {
   const classNameByType = getClassNameByType(type);
 
   return (
-    <button className={`${classes.Button} ${classNameByType}`} onClick={onClick}>
+    <button style={{ ...(style ? style : {}) }} className={`${classes.Button} ${classNameByType}`} onClick={onClick}>
       {children}
     </button>
-  )
-}
+  );
+};
 
 export default Button;

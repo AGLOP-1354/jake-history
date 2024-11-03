@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 42.67rem;
   margin: 88px auto;
-  min-height: calc(100vh - 70px - 88px);
+  min-height: calc(100vh - 71px - 88px);
   display: flex;
   flex-direction: column;
   gap: 24px;

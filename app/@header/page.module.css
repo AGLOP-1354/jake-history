@@ -17,3 +17,13 @@
   text-decoration: none;
   color: unset;
 }
+
+.headerRightItems {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.searchIcon {
+  cursor: pointer;
+}

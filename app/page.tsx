@@ -21,7 +21,7 @@ const Home = async ({ searchParams }: Props) => {
   const hasHistories = !!histories && histories.length !== 0;
 
   return (
-    <main style={{ position: "relative", height: "calc(100vh - 70px)" }}>
+    <main style={{ position: "relative", height: "calc(100vh - 71px)" }}>
       {hasHistories ? (
         <div className={classes.Home}>
           {histories?.map((historyData) => <History key={historyData.id} {...historyData} />)}
