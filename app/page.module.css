@@ -1,5 +1,5 @@
 .Home {
-  max-width: 1200px;
+  max-width: 75rem;
   padding: 36px;
   margin: auto;
   display: grid;
@@ -22,4 +22,18 @@
 .noResultText {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+@media (max-width: 1440px) {
+  .Home {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 50rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .Home {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 30rem;
+  }
 }

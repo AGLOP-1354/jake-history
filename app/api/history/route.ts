@@ -49,6 +49,7 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const tagName = searchParams.get("tag");
+  const searchValue = searchParams.get("searchValue");
 
   try {
     let tag = null;
@@ -56,7 +57,11 @@ export async function GET(request: Request) {
       tag = await Tag.findOne({ name: tagName });
     }
 
-    const histories = await History.find({ deletedAt: null, ...(tag ? { tags: { $in: [tag?._id] } } : {}) })
+    const histories = await History.find({
+      deletedAt: null,
+      ...(tag ? { tags: { $in: [tag?._id] } } : {}),
+      ...(searchValue ? { title: { $regex: searchValue, $options: "i" } } : {}),
+    })
       .populate("tags")
       .sort({ updatedAt: -1 });
     return NextResponse.json(histories, { status: 200 });

@@ -1,0 +1,50 @@
+.searchModalHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.searchModalHeader > *:last-child {
+  flex: 1 !important;
+  background: transparent !important;
+}
+
+.link {
+  text-decoration: none;
+  color: unset !important;
+}
+
+.searchModalBodyItem {
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid var(--bg-200);
+}
+
+.searchModalBodyItemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.searchModalBodyItemTitle {
+  font-size: 1rem;
+}
+
+.searchModalBodyItemSummary {
+  font-size: 0.75rem;
+  color: var(--text-200);
+}
+
+.searchModalBodyItemTags {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.historyTag {
+  font-size: 12px;
+  padding: 6px 12px;
+  background: var(--bg-300);
+  border-radius: 50px;
+  color: var(--primary-200);
+}
