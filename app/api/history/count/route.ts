@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   const tagName = searchParams.get("tag");
 
   try {
-    let tag = null;
+    let tag: any = null;
     if (tagName) {
       tag = await Tag.findOne({ name: tagName });
     }

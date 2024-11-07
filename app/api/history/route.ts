@@ -50,7 +50,7 @@ export async function GET(request: Request) {
   const searchValue = searchParams.get("searchValue");
 
   try {
-    let tag = null;
+    let tag: any = null;
     if (tagName) {
       tag = await Tag.findOne({ name: tagName });
     }

@@ -10,9 +10,7 @@ import { HistoryType } from "@/src/lib/types/history";
 import classes from "./page.module.css";
 
 type Props = {
-  params: {
-    historyUrl: string;
-  };
+  params: Promise<{ historyUrl: string }>;
 };
 
 const HistoryDetail = async ({ params }: Props) => {

@@ -9,9 +9,7 @@ import History from "../components/history";
 import classes from "./page.module.css";
 
 type Props = {
-  searchParams: {
-    tag?: string;
-  };
+  searchParams: Promise<{ tag?: string }>;
 };
 
 const Home = async ({ searchParams }: Props) => {
