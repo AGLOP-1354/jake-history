@@ -7,16 +7,7 @@ import { HistoryType } from "@/src/lib/types/history";
 
 import classes from "./history.module.css";
 
-const History = ({
-  title,
-  imageUrl,
-  summary,
-  content,
-  url,
-  updatedAt,
-  tags,
-  // categoryId?: string;
-}: HistoryType) => {
+const History = ({ title, imageUrl, summary, content, url, updatedAt, tags }: HistoryType) => {
   return (
     <div className={classes.History}>
       <Link href={`/history/${url}`} className={classes.link}>

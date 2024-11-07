@@ -32,7 +32,7 @@ type Props = {
   children: ReactNode;
 };
 
-const Drawer = ({ open, onClose, title, children }: Props) => {
+const Drawer = ({ open, title, children }: Props) => {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";

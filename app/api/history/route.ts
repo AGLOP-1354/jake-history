@@ -10,14 +10,13 @@ interface HistoryData {
   imageUrl?: string;
   summary?: string;
   url?: string;
-  categoryId?: string;
   tagIds?: string[];
 }
 
 export async function POST(request: Request) {
   await dbConnect();
 
-  const { title, content, imageUrl, tagIds = [], summary, categoryId, url }: HistoryData = await request.json();
+  const { title, content, imageUrl, tagIds = [], summary, url }: HistoryData = await request.json();
 
   if (!title || !content || !url) {
     return NextResponse.json({ message: "Title, content and url are required" }, { status: 400 });
@@ -33,7 +32,6 @@ export async function POST(request: Request) {
       tags: tagObjectIds,
       imageUrl,
       summary,
-      categoryId,
       url,
     });
     await newHistory.save();

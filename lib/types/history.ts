@@ -7,7 +7,6 @@ export type HistoryType = {
   imageUrl?: string;
   summary?: string;
   url?: string;
-  categoryId?: string;
   tags?: TagType[];
   createdAt: Date;
   updatedAt: Date;

@@ -25,7 +25,6 @@ const HistoryEditor = () => {
     file: null,
     summary: "",
     url: "",
-    categoryId: "",
     tagNames: [],
   });
   const [isHistoryOptionsSettingDrawerOpened, setIsHistoryOptionsSettingDrawerOpened] = useState(false);

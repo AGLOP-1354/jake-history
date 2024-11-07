@@ -8,7 +8,6 @@ interface IHistory extends Document {
   imageUrl?: string;
   summary?: string;
   url: string;
-  categoryId?: string;
   tagIds?: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -44,10 +43,6 @@ const HistorySchema = new mongoose.Schema<IHistory>(
       required: true,
     },
     tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
-    categoryId: {
-      type: String,
-      required: false,
-    },
     deletedAt: {
       type: Date,
       default: null,

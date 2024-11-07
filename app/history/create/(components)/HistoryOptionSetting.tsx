@@ -13,7 +13,6 @@ export type HistoryOptionsType = {
   file?: File | null;
   summary?: string;
   url?: string;
-  categoryId?: string;
   tagNames?: string[];
 };
 
@@ -26,7 +25,7 @@ type Props = {
 };
 
 const HistoryOptionSetting = ({ historyTitle, onCancel, onSubmit, historyOptions, onChangeHistoryOptions }: Props) => {
-  const { summary = "", url = "", categoryId = "", tagNames = [] } = historyOptions;
+  const { summary = "", url = "", tagNames = [] } = historyOptions;
 
   const addTag = (newTagName: string) => {
     onChangeHistoryOptions({
