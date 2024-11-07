@@ -2,6 +2,10 @@
   "name": "jake-history",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.10.0",
+    "npm": ">=10.2.3"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
