@@ -133,10 +133,11 @@ const HistoryEditor = () => {
           placeholder="제목을 적어주세요."
           className={classes.storyTitleInput}
         />
-        <Editor content={content} onChange={setContent} />
+
+        <Editor onChange={setContent} />
 
         <div className={classes.historyHandler}>
-          <Link href="/public" className={classes.prevButton}>
+          <Link href="/" className={classes.prevButton}>
             나가기
           </Link>
 

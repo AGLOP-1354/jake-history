@@ -1,141 +1,35 @@
-.ck > * {
-  background: transparent !important;
+
+.toastui-editor-md-container.toastui-editor-md-none-style,
+.toastui-editor-defaultUI .toastui-editor-defaultUI-toolbar,
+.toastui-editor-defaultUI {
+  background-color: var(--bg-100) !important; /* 다크 배경색 */
+  color: #f1f1f1 !important; /* 텍스트 색상 */
+}
+
+.toastui-editor-defaultUI,
+.toastui-editor-defaultUI * {
   border: none !important;
+  color: #f1f1f1 !important;
 }
 
-.ck.ck-reset.ck-editor.ck-rounded-corners {
-  flex: 1;
-  height: 100%;
-  max-height: calc(100vh - 71px);
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 36px 42px;
-}
-
-.ck.ck-toolbar__items {
-  gap: 8px;
-}
-
-.ck.ck-toolbar__items * {
-  color: var(--text-100) !important;
-  font-size: 12px !important;
-}
-
-.ck.ck-balloon-panel.ck-powered-by-balloon .ck.ck-powered-by {
+.toastui-editor-defaultUI .toastui-editor-md-tab-container,
+.toastui-editor-defaultUI .toastui-editor-md-tab-container *,
+.toastui-editor-defaultUI .toastui-editor-mode-switch,
+.toastui-editor-defaultUI .toastui-editor-mode-switch * {
   display: none !important;
 }
 
-
-/* Bold */
-.ck-content b,
-.ck-content strong {
-  font-weight: bold;
+.toastui-editor-contents {
+  background-color: var(--bg-100) !important; /* 다크 배경색 */
+  color: #f1f1f1; /* 에디터 내용 텍스트 색상 */
 }
 
-/* Italic */
-.ck-content i,
-.ck-content em {
-  font-style: italic;
+.toastui-editor-toolbar {
+  background-color: var(--bg-100) !important; /* 다크 배경색 */
+  border-bottom: 1px solid #444; /* 툴바 테두리 색상 */
 }
 
-/* Underline */
-.ck-content u {
-  text-decoration: underline;
-}
-
-/* Strikethrough */
-.ck-content s,
-.ck-content strike {
-  text-decoration: line-through;
-}
-
-/* Link */
-.ck-content a {
-  color: #0645ad;
-  text-decoration: underline;
-}
-
-/* Blockquote */
-.ck-content blockquote {
-  border-left: 4px solid #ccc;
-  margin: 1em;
-  padding-left: 1em;
-  color: #666;
-  font-style: italic;
-  background-color: #f9f9f9;
-}
-
-/* Heading */
-.ck-content h1 {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.ck-content h2 {
-  font-size: 1.75em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.ck-content h3 {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.ck-content h4 {
-  font-size: 1.25em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.ck-content h5 {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.ck-content h6 {
-  font-size: 0.875em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-/* Inline Code */
-.ck-content code {
-  background-color: #f4f4f4;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  font-family: monospace;
-}
-
-/* Unordered List (ul) */
-.ck-content ul {
-  list-style-type: disc; /* 기본 불릿 스타일 */
-  margin: 1em 0;         /* 위아래 여백 */
-  padding-left: 1.5em;   /* 왼쪽 여백 */
-}
-
-/* Ordered List (ol) */
-.ck-content ol {
-  list-style-type: decimal; /* 숫자형 리스트 */
-  margin: 1em 0;            /* 위아래 여백 */
-  padding-left: 1.5em;      /* 왼쪽 여백 */
-}
-
-/* List Item (li) - ul과 ol의 기본 스타일 유지 */
-.ck-content ul li,
-.ck-content ol li {
-  margin: 0.5em 0;          /* 각 리스트 아이템 간 간격 */
-  line-height: 1.6;         /* 줄 간격 */
-}
-
-/* 중첩 리스트 스타일 */
-.ck-content ul ul,
-.ck-content ol ol,
-.ck-content ul ol,
-.ck-content ol ul {
-  list-style-type: circle; /* 중첩된 리스트는 원형 불릿 */
-  margin-left: 1.5em;      /* 추가 들여쓰기 */
+/* customEditorStyles.css */
+.toastui-editor-defaultUI .toastui-editor-toolbar svg {
+  fill: #ffffff; /* 아이콘 색상을 흰색으로 변경 */
 }

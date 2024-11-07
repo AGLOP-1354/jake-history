@@ -16,6 +16,7 @@
   padding: 36px 42px 0;
   caret-color: var(--text-200);
   color: var(--text-100);
+  margin-bottom: 24px;
 }
 
 .storyTitleInput:focus {

@@ -1,28 +1,47 @@
-"use client";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "../../ckeditor/dist/ckeditor";
+import React, { useLayoutEffect, useRef } from "react";
+import { Editor } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 
 import "./editor.css";
 
-type Props = {
-  content: string;
-  onChange: (changedContent: string) => void;
-};
+const MarkdownEditor = ({ onChange }: { onChange: (html: string) => void }) => {
+  const editorRef = useRef<Editor>(null);
 
-const Editor = ({ content, onChange }: Props) => {
+  const handleChange = () => {
+    if (editorRef.current) {
+      const html = editorRef.current.getInstance().getHTML();
+      onChange(html);
+    }
+  };
+
+  useLayoutEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.getInstance().setMarkdown("");
+    }
+  }, []);
+
   return (
-    <CKEditor
-      editor={ClassicEditor}
-      data={content}
-      config={{
-        placeholder: "여기에 스토리를 적어주세요...",
-      }}
-      onChange={(event, editor) => {
-        const data = editor.getData();
-        onChange(data);
-      }}
-    />
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "20px" }}>
+      <Editor
+        ref={editorRef}
+        previewStyle="none"
+        height="100%"
+        initialEditType="markdown"
+        useCommandShortcut={true}
+        onChange={handleChange}
+        toolbarItems={[
+          ["heading", "bold", "italic", "strike"],
+          ["hr", "quote"],
+          ["ul", "ol", "task", "indent", "outdent"],
+          ["table", "image", "link"],
+          ["code", "codeblock"],
+        ]}
+        theme="dark"
+        placeholder="Write your story here..."
+      />
+    </div>
   );
 };
 
-export default Editor;
+export default MarkdownEditor;
