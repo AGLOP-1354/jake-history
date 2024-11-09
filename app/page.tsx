@@ -3,7 +3,7 @@ import { IconNoteOff } from "@tabler/icons-react";
 import Navigation from "@/src/components/navigation";
 import { getFetch } from "@/src/lib/customFetch";
 import { HistoryType } from "@/src/lib/types/history";
-
+import { TagType } from "@/src/lib/types/tag";
 import History from "../components/history";
 
 import classes from "./page.module.css";
@@ -13,8 +13,11 @@ type Props = {
 };
 
 const Home = async ({ searchParams }: Props) => {
-  const { tag } = await searchParams;
+  const { t } = await searchParams;
+
   const histories: HistoryType[] = await getFetch("/api/history", { tag: tag || "" });
+  const tagList: TagType[] = await getFetch("/api/tag");
+  const historyCounts: number = await getFetch("/api/history/count");
 
   const hasHistories = !!histories && histories.length !== 0;
 
@@ -30,7 +33,7 @@ const Home = async ({ searchParams }: Props) => {
           <span className={classes.noResultText}>조회 결과가 없습니다.</span>
         </div>
       )}
-      <Navigation />
+      <Navigation tagList={tagList} historyCounts={historyCounts} />
     </main>
   );
 };

@@ -1,27 +1,21 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import classNames from "classnames";
 
-import { getFetch } from "@/src/lib/customFetch";
 import Divider from "@/src/components/display/divider";
 import { TagType } from "@/src/lib/types/tag";
 
 import classes from "./navigation.module.css";
 
-const Navigation = () => {
+type Props = {
+  tagList: TagType[];
+  historyCounts: number;
+};
+
+const Navigation = ({ tagList, historyCounts }: Props) => {
   const searchParams = useSearchParams();
   const selectedTagName = searchParams.get("tag");
-
-  const { data: tagList }: UseQueryResult<TagType[], Error> = useQuery({
-    queryKey: ["all-tag-list"],
-    queryFn: () => getFetch("/api/tag"),
-  });
-  const { data: historyCounts = 0 }: UseQueryResult<number, Error> = useQuery({
-    queryKey: ["history-counts"],
-    queryFn: () => getFetch("/api/history/count"),
-  });
 
   if (!tagList) return null;
 
