@@ -55,3 +55,10 @@
     min-height: 50svh;
   }
 }
+
+@media (max-width: 1024px) {
+  .Modal {
+    min-width: 90vw;
+    min-height: 50vh;
+  }
+}
