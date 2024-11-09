@@ -26,7 +26,7 @@ const History = ({ title, imageUrl, summary, content, url, updatedAt, tags }: Hi
           <h3 className={classes.historyTitle}>{title}</h3>
           <span className={classes.historyContent}>{summary || content}</span>
 
-          <span className={classes.historyCreateDate}>{dayjs(updatedAt).format("YY년 DD월 mm일")}</span>
+          <span className={classes.historyCreateDate}>{dayjs(updatedAt).format("YY년 MM월 DD일")}</span>
         </div>
 
         <div style={{ height: 1, width: "100svw", background: "#9e9e9e" }} />

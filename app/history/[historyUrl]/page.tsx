@@ -29,7 +29,7 @@ const HistoryDetail = async ({ params }: Props) => {
         <h1 className={classes.historyTitle}>{title}</h1>
 
         <div className={classes.historyDetailSubHeader}>
-          <span className={classes.historyDetailUpdatedAt}>{dayjs(updatedAt).format("YY년 DD월 mm일")}</span>
+          <span className={classes.historyDetailUpdatedAt}>{dayjs(updatedAt).format("YY년 MM월 DD일")}</span>
 
           <div className={classes.historyDetailHandler}>
             <Link href={`/history/edit/${historyUrl}`}>수정</Link>
