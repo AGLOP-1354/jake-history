@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Home = async ({ searchParams }: Props) => {
-  const { t } = await searchParams;
+  const { tag } = await searchParams;
 
   const histories: HistoryType[] = await getFetch("/api/history", { tag: tag || "" });
   const tagList: TagType[] = await getFetch("/api/tag");
