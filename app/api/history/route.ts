@@ -62,6 +62,7 @@ export async function GET(request: Request) {
     })
       .populate("tags")
       .sort({ updatedAt: -1 });
+
     return NextResponse.json(histories, { status: 200 });
   } catch (error) {
     console.error("Error fetching histories:", error);

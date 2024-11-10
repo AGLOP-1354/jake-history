@@ -24,9 +24,9 @@ const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
 
   useEffect(() => {
     if (isClient) {
-      hljs.highlightAll(); // 코드 블록 하이라이팅
+      hljs.highlightAll();
     }
-  }, [content, isClient]); // content가 변경될 때마다 Prism 하이라이팅 실행
+  }, [content, isClient]);
 
   if (!isClient) return null;
 

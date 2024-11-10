@@ -10,7 +10,8 @@ const MarkdownEditor = ({ onChange }: { onChange: (html: string) => void }) => {
 
   const handleChange = () => {
     if (editorRef.current) {
-      const html = editorRef.current.getInstance().getHTML();
+      const instance = editorRef.current.getInstance();
+      const html = instance.getHTML();
       onChange(html);
     }
   };

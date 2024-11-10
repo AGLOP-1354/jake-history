@@ -10,6 +10,7 @@ import Drawer from "@/src/components/interactive/drawer";
 import { getFetch, postFetch } from "@/src/lib/customFetch";
 import uploadS3Image from "@/src/lib/actions/uploadS3Image";
 import { TagType } from "@/src/lib/types/tag";
+import { revalidateTags } from "@/src/lib/actions/revalidTag";
 
 import HistoryOptionSetting from "./HistoryOptionSetting";
 import type { HistoryOptionsType } from "./HistoryOptionSetting";
@@ -55,8 +56,9 @@ const HistoryEditor = () => {
 
   const createTagList = async () => {
     try {
-      const createdTagList: { data?: TagType[] } = await postFetch("/api/tag/list", {
-        tagNames: historyOptions.tagNames,
+      const createdTagList: { data?: TagType[] } = await postFetch({
+        url: "/api/tag/list",
+        queryParams: { tagNames: historyOptions.tagNames },
       });
 
       if (!createdTagList?.data || !createdTagList.data.length) {
@@ -76,7 +78,10 @@ const HistoryEditor = () => {
       return false;
     }
 
-    const isDuplicateHistory = await getFetch("/api/history/one/validate-url", { url: historyOptions?.url });
+    const isDuplicateHistory = await getFetch({
+      url: "/api/history/one/validate-url",
+      queryParams: { url: historyOptions?.url },
+    });
     if (isDuplicateHistory) {
       alert("이미 존재하는 URL이 있어요. 다른 URL로 수정해주세요.");
       return false;
@@ -107,13 +112,18 @@ const HistoryEditor = () => {
         imageUrl = _imageUrl;
       }
 
-      await postFetch("/api/history", {
-        title: storyTitle,
-        content,
-        tagIds,
-        imageUrl,
-        ...historyOptions,
+      await postFetch({
+        url: "/api/history",
+        queryParams: {
+          title: storyTitle,
+          content,
+          tagIds,
+          imageUrl,
+          ...historyOptions,
+        },
       });
+
+      await revalidateTags(["histories", "tagList", "historyCounts"]);
 
       alert("히스토리가 등록되었습니다.");
       router.push("/");

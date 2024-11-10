@@ -15,9 +15,16 @@ type Props = {
 const Home = async ({ searchParams }: Props) => {
   const { tag } = await searchParams;
 
-  const histories: HistoryType[] = await getFetch("/api/history", { tag: tag || "" });
-  const tagList: TagType[] = await getFetch("/api/tag");
-  const historyCounts: number = await getFetch("/api/history/count");
+  const histories: HistoryType[] = await getFetch({
+    url: "/api/history",
+    queryParams: { tag: tag || "" },
+    options: { next: { tags: ["histories"] } },
+  });
+  const tagList: TagType[] = await getFetch({ url: "/api/tag", options: { next: { tags: ["tagList"] } } });
+  const historyCounts: number = await getFetch({
+    url: "/api/history/count",
+    options: { next: { tags: ["historyCounts"] } },
+  });
 
   const hasHistories = !!histories && histories.length !== 0;
 

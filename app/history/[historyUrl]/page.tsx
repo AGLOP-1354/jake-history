@@ -19,8 +19,9 @@ const HistoryDetail = async ({ params }: Props) => {
     notFound();
   }
 
-  const { title, content, imageUrl, tags, updatedAt }: HistoryType = await getFetch("/api/history/url", {
-    url: historyUrl,
+  const { title, content, imageUrl, tags, updatedAt }: HistoryType = await getFetch({
+    url: "/api/history/url",
+    queryParams: { url: historyUrl },
   });
 
   return (
@@ -63,8 +64,6 @@ const HistoryDetail = async ({ params }: Props) => {
           style={{
             padding: "12px 0",
             background: "var(--bg-100)",
-            height: "100%",
-            overflowY: "visible",
           }}
         />
       </div>

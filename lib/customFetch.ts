@@ -8,7 +8,13 @@ const serializeQueryParams = (params: Record<string, string | number | boolean>)
   return query.toString();
 };
 
-const getFetch = async <T>(url: string, queryParams?: Record<string, string | number | boolean>): Promise<T> => {
+type FetchOptions = {
+  url: string;
+  queryParams?: Record<string, string | number | boolean> | { [key: string]: any };
+  options?: RequestInit;
+};
+
+const getFetch = async <T>({ url, queryParams, options }: FetchOptions): Promise<T> => {
   const defaultUrl = getDefaultUrl();
 
   try {
@@ -18,6 +24,7 @@ const getFetch = async <T>(url: string, queryParams?: Record<string, string | nu
       headers: {
         "Content-Type": "application/json",
       },
+      ...options,
     });
 
     if (!response.ok) {
@@ -31,7 +38,7 @@ const getFetch = async <T>(url: string, queryParams?: Record<string, string | nu
   }
 };
 
-const postFetch = async <T>(url: string, body: Record<string, unknown>): Promise<T> => {
+const postFetch = async <T>({ url, queryParams, options }: FetchOptions): Promise<T> => {
   const defaultUrl = getDefaultUrl();
 
   try {
@@ -40,7 +47,8 @@ const postFetch = async <T>(url: string, body: Record<string, unknown>): Promise
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(queryParams),
+      ...options,
     });
 
     if (!response.ok) {

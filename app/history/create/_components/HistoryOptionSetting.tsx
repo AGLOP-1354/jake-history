@@ -83,10 +83,6 @@ const HistoryOptionSetting = ({ historyTitle, onCancel, onSubmit, historyOptions
                 prefix="/history/"
               />
             </div>
-            <div className={classes.container}>
-              <h3 className={classes.title}>카테고리 설정</h3>
-              <div>카테고리 추가</div>
-            </div>
 
             <div className={classes.container}>
               <h3 className={classes.title}>태그 설정</h3>

@@ -5,9 +5,9 @@ import { HistoryType } from "../types/history";
 
 const getHistories = async ({ tag, searchValue }: { tag?: string; searchValue?: string }) => {
   try {
-    const res: HistoryType[] = await getFetch("/api/history", {
-      tag: tag || "",
-      searchValue: searchValue || "",
+    const res: HistoryType[] = await getFetch({
+      url: "/api/history",
+      queryParams: { tag: tag || "", searchValue: searchValue || "" },
     });
 
     return res;
