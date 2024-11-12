@@ -4,6 +4,7 @@ import classes from "./button.module.css";
 
 type Props = {
   type?: "primary" | "secondary" | "default";
+  size?: "small" | "medium" | "large";
   onClick?: () => void;
   style?: {
     [styleName: string]: any;
@@ -23,11 +24,27 @@ const getClassNameByType = (type: string) => {
   }
 };
 
-const Button = ({ type = "primary", onClick, style, children }: Props) => {
+const getClassNameBySize = (size: string) => {
+  switch (size) {
+    case "small":
+      return classes.small;
+    case "medium":
+      return classes.medium;
+    case "large":
+      return classes.large;
+  }
+};
+
+const Button = ({ type = "primary", onClick, size = "medium", style, children }: Props) => {
   const classNameByType = getClassNameByType(type);
+  const classNameBySize = getClassNameBySize(size);
 
   return (
-    <button style={{ ...(style ? style : {}) }} className={`${classes.Button} ${classNameByType}`} onClick={onClick}>
+    <button
+      style={{ ...(style ? style : {}) }}
+      className={`${classes.Button} ${classNameByType} ${classNameBySize}`}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

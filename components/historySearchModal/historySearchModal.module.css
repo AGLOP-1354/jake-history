@@ -34,17 +34,3 @@
   font-size: 0.75rem;
   color: var(--text-200);
 }
-
-.searchModalBodyItemTags {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.historyTag {
-  font-size: 12px;
-  padding: 6px 12px;
-  background: var(--bg-300);
-  border-radius: 50px;
-  color: var(--primary-200);
-}

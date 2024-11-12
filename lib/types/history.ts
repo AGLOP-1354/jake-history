@@ -1,4 +1,4 @@
-import { TagType } from "@/src/lib/types/tag";
+import type { CategoryType } from "./category";
 
 export type HistoryType = {
   id: string;
@@ -6,8 +6,7 @@ export type HistoryType = {
   content: string;
   imageUrl?: string;
   summary?: string;
-  url?: string;
-  tags?: TagType[];
+  category?: CategoryType;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;

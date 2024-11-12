@@ -1,6 +1,6 @@
 .HistoryDetail {
   width: 100%;
-  max-width: 42.67rem;
+  max-width: 55rem;
   margin: 88px auto;
   min-height: calc(100vh - 71px - 88px);
   display: flex;
@@ -56,18 +56,4 @@
 .image {
   object-fit: cover;
   object-position: center;
-}
-
-.historyTags {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.historyTag {
-  font-size: 12px;
-  padding: 6px 12px;
-  background: var(--bg-300);
-  border-radius: 50px;
-  color: var(--primary-200);
 }

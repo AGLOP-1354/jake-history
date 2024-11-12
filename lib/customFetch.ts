@@ -42,6 +42,8 @@ const postFetch = async <T>({ url, queryParams, options }: FetchOptions): Promis
   const defaultUrl = getDefaultUrl();
 
   try {
+    console.log("queryParams", queryParams);
+    console.log("`${defaultUrl}${url}`", `${defaultUrl}${url}`);
     const response = await fetch(`${defaultUrl}${url}`, {
       method: "POST",
       headers: {

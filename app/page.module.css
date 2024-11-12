@@ -1,9 +1,10 @@
 .Home {
-  max-width: 75rem;
+  max-width: 90rem;
+  width: 90rem;
   padding: 36px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   align-items: flex-start;
   justify-items: center;
   gap: 24px;
@@ -26,7 +27,7 @@
 
 @media (max-width: 1440px) {
   .Home {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     max-width: 50rem;
   }
 }

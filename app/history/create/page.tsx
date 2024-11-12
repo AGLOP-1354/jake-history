@@ -1,10 +1,15 @@
-"use client";
-import dynamic from "next/dynamic";
+import { getFetch } from "@/src/lib/customFetch";
+import type { CategoryType } from "@/src/lib/types/category";
 
-const HistoryEditor = dynamic(() => import("@/src/app/history/create/_components/HistoryEditor"), { ssr: false });
+import HistoryEditor from "./_components/HistoryEditor";
 
-const CreateHistoryPage = () => {
-  return <HistoryEditor />;
+const CreateHistoryPage = async () => {
+  const categories: CategoryType[] = await getFetch({
+    url: "/api/category/all",
+    options: { next: { tags: ["categories"] } },
+  });
+
+  return <HistoryEditor categories={categories} />;
 };
 
 export default CreateHistoryPage;

@@ -62,3 +62,38 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.createCategoryInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.createCategoryInput div {
+  flex: 1;
+}
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.categoryItem {
+  font-size: 1rem;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--bg-200);
+  cursor: pointer;
+}
+
+.categoryItem:hover {
+  background: var(--bg-200);
+}
+
+.selectedCategoryItem {
+  background: var(--primary-200) !important;
+}

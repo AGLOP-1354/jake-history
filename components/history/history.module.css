@@ -8,10 +8,12 @@
   justify-content: center;
   background: var(--bg-200);
   max-width: 100%;
+  width: 100%;
   overflow: hidden;
   border-radius: 8px;
   height: 100%;
   max-height: 363px;
+  position: relative;
 }
 
 .historyImage {
@@ -54,7 +56,6 @@
 .historyContent {
   font-size: 14px;
   color: var(--text-200);
-  margin-bottom: 24px;
 }
 
 .historyCreateDate {
@@ -70,20 +71,11 @@
   height: 56px;
 }
 
-.historyTags {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.historyTag {
+.historyCategory {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
   font-size: 12px;
-  padding: 6px 12px;
-  background: var(--bg-300);
-  border-radius: 50px;
-  color: var(--primary-200);
-}
-
-.heartCount {
-  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 4px;
 }

@@ -10,19 +10,20 @@ import { HistoryType } from "@/src/lib/types/history";
 import classes from "./page.module.css";
 
 type Props = {
-  params: Promise<{ historyUrl: string }>;
+  params: Promise<{ historyId: string }>;
 };
 
 const HistoryDetail = async ({ params }: Props) => {
-  const { historyUrl } = await params;
-  if (!historyUrl) {
+  const { historyId } = await params;
+  if (!historyId) {
     notFound();
   }
 
-  const { title, content, imageUrl, tags, updatedAt }: HistoryType = await getFetch({
-    url: "/api/history/url",
-    queryParams: { url: historyUrl },
+  const { title, content, imageUrl, updatedAt }: HistoryType = await getFetch({
+    url: "/api/history/one",
+    queryParams: { id: historyId },
   });
+  console.log("content", content);
 
   return (
     <div className={classes.HistoryDetail}>
@@ -33,21 +34,11 @@ const HistoryDetail = async ({ params }: Props) => {
           <span className={classes.historyDetailUpdatedAt}>{dayjs(updatedAt).format("YY년 MM월 DD일")}</span>
 
           <div className={classes.historyDetailHandler}>
-            <Link href={`/history/edit/${historyUrl}`}>수정</Link>
+            <Link href={`/history/edit/${historyId}`}>수정</Link>
 
             <span>삭제</span>
           </div>
         </div>
-
-        {tags && (
-          <div className={classes.historyTags}>
-            {tags?.map((tag) => (
-              <span key={tag.id} className={classes.historyTag}>
-                {tag.name}
-              </span>
-            ))}
-          </div>
-        )}
       </header>
 
       <div className={classes.content}>

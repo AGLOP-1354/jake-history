@@ -1,16 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import dayjs from "dayjs";
 import { IconPhotoScan } from "@tabler/icons-react";
 
 import { HistoryType } from "@/src/lib/types/history";
+import getContrastingTextColor from "@/src/lib/utils/getContrastingTextColor";
 
 import classes from "./history.module.css";
 
-const History = ({ title, imageUrl, summary, content, url, updatedAt, tags }: HistoryType) => {
+const History = ({ id, title, imageUrl, summary, content, category }: HistoryType) => {
+  const contrastingTextColor = getContrastingTextColor(category?.color || "#000000");
+
   return (
     <div className={classes.History}>
-      <Link href={`/history/${url}`} className={classes.link}>
+      <Link href={`/history/${id}`} className={classes.link}>
         <div className={classes.historyImage}>
           {imageUrl ? (
             <Image quality={100} src={imageUrl} alt={`${title} 이미지`} fill className={classes.image} />
@@ -25,23 +27,15 @@ const History = ({ title, imageUrl, summary, content, url, updatedAt, tags }: Hi
         <div className={classes.historyContentWrapper}>
           <h3 className={classes.historyTitle}>{title}</h3>
           <span className={classes.historyContent}>{summary || content}</span>
-
-          <span className={classes.historyCreateDate}>{dayjs(updatedAt).format("YY년 MM월 DD일")}</span>
-        </div>
-
-        <div style={{ height: 1, width: "100svw", background: "#9e9e9e" }} />
-        <div className={classes.historyAdditionalInformation}>
-          <div className={classes.historyTags}>
-            {tags?.map((tag) => (
-              <span key={tag.id} className={classes.historyTag}>
-                {tag.name}
-              </span>
-            ))}
-          </div>
-
-          {/*<span className={classes.heartCount}>하트 {likeCount}</span>*/}
         </div>
       </Link>
+
+      <div
+        className={classes.historyCategory}
+        style={{ backgroundColor: category?.color, color: contrastingTextColor }}
+      >
+        {category?.name}
+      </div>
     </div>
   );
 };

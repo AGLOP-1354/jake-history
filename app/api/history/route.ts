@@ -2,37 +2,35 @@ import { NextResponse } from "next/server";
 
 import dbConnect from "@/src/lib/mongodb";
 import History from "@/src/models/History";
-import Tag from "@/src/models/Tag";
+import Category from "@/src/models/Category";
 
 interface HistoryData {
   title: string;
   content: string;
   imageUrl?: string;
   summary?: string;
-  url?: string;
-  tagIds?: string[];
+  categoryId?: string;
 }
 
 export async function POST(request: Request) {
   await dbConnect();
 
-  const { title, content, imageUrl, tagIds = [], summary, url }: HistoryData = await request.json();
+  const { title, content, imageUrl, categoryId, summary }: HistoryData = await request.json();
 
-  if (!title || !content || !url) {
-    return NextResponse.json({ message: "Title, content and url are required" }, { status: 400 });
+  if (!title || !content) {
+    return NextResponse.json({ message: "Title, content are required" }, { status: 400 });
   }
 
   try {
-    const tags = await Tag.find({ id: { $in: tagIds } }).select("_id");
-    const tagObjectIds = tags.map((tag) => tag._id);
+    const category = await Category.findOne({ id: { $in: categoryId } }).select("_id");
+    const categoryObjectId = category?._id;
 
     const newHistory = new History({
       title,
       content,
-      tags: tagObjectIds,
+      category: categoryObjectId,
       imageUrl,
       summary,
-      url,
     });
     await newHistory.save();
     return NextResponse.json({ message: "History created successfully", data: newHistory }, { status: 201 });
@@ -42,25 +40,15 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+// export async function GET(request: Request) {
+export async function GET() {
   await dbConnect();
 
-  const { searchParams } = new URL(request.url);
-  const tagName = searchParams.get("tag");
-  const searchValue = searchParams.get("searchValue");
-
   try {
-    let tag: any = null;
-    if (tagName) {
-      tag = await Tag.findOne({ name: tagName });
-    }
-
     const histories = await History.find({
       deletedAt: null,
-      ...(tag ? { tags: { $in: [tag?._id] } } : {}),
-      ...(searchValue ? { title: { $regex: searchValue, $options: "i" } } : {}),
     })
-      .populate("tags")
+      .populate("category")
       .sort({ updatedAt: -1 });
 
     return NextResponse.json(histories, { status: 200 });

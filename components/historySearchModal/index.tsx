@@ -60,16 +60,6 @@ const SearchModal = ({ searchModalOpened, onClose }: SearchModalProps) => {
                 <span className={classes.searchModalBodyItemTitle}>{history.title}</span>
                 <span className={classes.searchModalBodyItemSummary}>{history.summary}</span>
               </div>
-
-              {history?.tags && (
-                <div className={classes.searchModalBodyItemTags}>
-                  {history.tags.map((tag) => (
-                    <span key={tag.id} className={classes.historyTag}>
-                      {tag.name}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
           </Link>
         ))}

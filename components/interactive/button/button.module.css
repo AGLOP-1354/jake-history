@@ -18,3 +18,15 @@
   background: #2d2d2d;
   border: 1px solid #9e9e9e;
 }
+
+.small {
+  padding: 4px 8px;
+}
+
+.medium {
+  padding: 8px 16px;
+}
+
+.large {
+  padding: 14px 24px;
+}

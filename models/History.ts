@@ -7,12 +7,10 @@ interface IHistory extends Document {
   content: string;
   imageUrl?: string;
   summary?: string;
-  url: string;
-  tagIds?: string[];
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
-  tags: { type: typeof mongoose.Schema.Types.ObjectId; ref: string }[];
+  category: { type: typeof mongoose.Schema.Types.ObjectId; ref: string };
 }
 
 const HistorySchema = new mongoose.Schema<IHistory>(
@@ -21,10 +19,12 @@ const HistorySchema = new mongoose.Schema<IHistory>(
       type: String,
       default: uuidv4,
       unique: true,
+      index: true,
     },
     title: {
       type: String,
       required: true,
+      index: true,
     },
     content: {
       type: String,
@@ -38,20 +38,25 @@ const HistorySchema = new mongoose.Schema<IHistory>(
       type: String,
       required: false,
     },
-    url: {
-      type: String,
-      required: true,
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      index: true,
     },
-    tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
     deletedAt: {
       type: Date,
       default: null,
+      sparse: true,
     },
   },
   {
     timestamps: true,
   }
 );
+
+HistorySchema.index({ title: "text", content: "text" });
+HistorySchema.index({ createdAt: -1 });
+HistorySchema.index({ title: 1, createdAt: -1 });
 
 const History: Model<IHistory> = mongoose.models.History || mongoose.model<IHistory>("History", HistorySchema);
 export default History;
