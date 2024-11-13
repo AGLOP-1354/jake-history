@@ -10,11 +10,16 @@
   height: 100%;
   max-height: 363px;
   position: relative;
-  transition: transform 0.2s ease-in-out;
 }
 
-.HistoryCard:hover {
-  transform: scale(1.1);
+.HistoryCard:hover .image,
+.HistoryCard:hover .noHistoryImage {
+  transform: scale(1.2);
+}
+
+.HistoryCard:hover .historyTitle,
+.HistoryCard:hover .historyContent {
+  color: var(--primary-200);
 }
 
 .link {
@@ -30,7 +35,7 @@
 
 .image {
   object-fit: cover;
-  object-position: center;
+  transition: transform 0.2s ease-in-out;
 }
 
 .noHistoryImage {
@@ -43,6 +48,7 @@
   font-weight: bold;
   font-size: 1rem;
   color: var(--bg-300);
+  transition: transform 0.2s ease-in-out;
 }
 
 .historyContentWrapper {
@@ -52,8 +58,8 @@
 }
 
 .historyTitle {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 700;
   color: var(--text-100);
   margin-bottom: 8px;
 }

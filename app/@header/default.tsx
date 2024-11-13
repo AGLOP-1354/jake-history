@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { IconEdit } from "@tabler/icons-react";
 
@@ -18,7 +19,12 @@ const Header = () => {
   return (
     <header className={classes.Header}>
       <Link href="/" className={classes.link}>
-        <h1 className={classes.pageTitle}>Jake History</h1>
+        <Image src="/images/jake-history.png" alt="Jake History" width={56} height={56} quality={100} />
+        <h1 className={classes.pageTitle}>
+          Jake
+          <br />
+          History
+        </h1>
       </Link>
 
       <div className={classes.headerRightItems}>
