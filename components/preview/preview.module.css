@@ -12,15 +12,13 @@
 }
 
 .preview p {
-  margin: 1em 0;
+  margin: 14px 0;
 }
 
-.preview h1, .preview h2, .preview h3 {
-  margin-top: 2.5rem
-}
-
-.preview h1 {
-  font-size: 2em;
+.preview h2,
+.preview h3 {
+  margin-bottom: .6rem;
+  padding-top: 50px;
 }
 
 .preview h2 {
@@ -92,10 +90,23 @@
   margin-bottom: 48px !important;
 }
 
+.preview code {
+  border: 1px solid var(--bg-300);
+  background: var(--bg-300);
+  padding: .05rem .25rem;
+  border-radius: 4px;
+  font-weight: bold;
+  color: var(--text-200);
+}
+
 .preview pre {
   background: rgba(69, 69, 69, 0.2);;
   padding: 16px;
   border-radius: 8px;
+}
+
+.preview pre code {
+  background: none;
 }
 
 /* Bold */

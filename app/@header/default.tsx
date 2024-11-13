@@ -20,7 +20,7 @@ const Header = () => {
     <header className={classes.HeaderWrapper}>
       <div className={classes.Header}>
         <Link href="/" className={classes.link}>
-          <Image src="/images/jake-history.png" alt="Jake History" width={56} height={56} quality={100} />
+          <Image src="/images/jake-history.png" alt="Jake History" width={56} height={56} quality={100} className={classes.logo} />
           <h1 className={classes.pageTitle}>
             Jake
             <br />
