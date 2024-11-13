@@ -26,7 +26,7 @@ const Navbar = ({ historiesByCategory, historyId }: Props) => {
   }, [searchValue, historiesByCategory]);
 
   const { width } = useViewport();
-  
+
   const navbarContent = (
     <>
       <div className={classes.Navbar__search}>
@@ -54,38 +54,39 @@ const Navbar = ({ historiesByCategory, historyId }: Props) => {
         ))}
       </div>
     </>
-  )
+  );
 
   if (width <= 1580) {
     return (
       <>
-      <div className={classes.Navbar__mobile}>
-        <IconMenu2
-          className={classNames(classes.Navbar__mobileIcon, {
-            [classes.Navbar__mobileIconActive]: isOpen,
-          })}
-          onClick={() => setIsOpen(!isOpen)}
-        />
+        <div className={classes.Navbar__mobile}>
+          <IconMenu2
+            className={classNames(classes.Navbar__mobileIcon, {
+              [classes.Navbar__mobileIconActive]: isOpen,
+            })}
+            onClick={() => setIsOpen(!isOpen)}
+          />
 
-        <div className={classNames(classes.Navbar__mobileContent, {
-          [classes.Navbar__mobileContentOpen]: isOpen,
-        })}>
+          <div
+            className={classNames(classes.Navbar__mobileContent, {
+              [classes.Navbar__mobileContentOpen]: isOpen,
+            })}
+          >
             {navbarContent}
           </div>
         </div>
 
-        <div className={classNames(classes.Navbar__mobileOverlay, {
-          [classes.Navbar__mobileOverlayActive]: isOpen,
-        })} onClick={() => setIsOpen(false)} />
+        <div
+          className={classNames(classes.Navbar__mobileOverlay, {
+            [classes.Navbar__mobileOverlayActive]: isOpen,
+          })}
+          onClick={() => setIsOpen(false)}
+        />
       </>
     );
   }
 
-  return (
-    <div className={classes.Navbar}>
-      {navbarContent}
-    </div>
-  );
+  return <div className={classes.Navbar}>{navbarContent}</div>;
 };
 
 export default Navbar;

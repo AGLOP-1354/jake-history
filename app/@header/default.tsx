@@ -15,7 +15,7 @@ const NOT_RENDERED_PATHNAME = ["/history/create"];
 
 const Header = () => {
   const pathname = usePathname();
-  const { isMobile } = useViewport()
+  const { isMobile } = useViewport();
 
   if (NOT_RENDERED_PATHNAME.includes(pathname)) return <></>;
 
@@ -23,7 +23,14 @@ const Header = () => {
     <header className={classes.HeaderWrapper}>
       <div className={classes.Header}>
         <Link href="/" className={classes.link}>
-          <Image src="/images/jake-history.png" alt="Jake History" width={56} height={56} quality={100} className={classes.logo} />
+          <Image
+            src="/images/jake-history.png"
+            alt="Jake History"
+            width={56}
+            height={56}
+            quality={100}
+            className={classes.logo}
+          />
           <h1 className={classes.pageTitle}>
             Jake
             <br />
@@ -32,12 +39,16 @@ const Header = () => {
         </Link>
 
         <div className={classes.headerRightItems}>
-          <Link href="https://github.com/AGLOP-1354" target="_blank" className={classNames(classes.githubLink, classes.headerRightItem)}>
+          <Link
+            href="https://github.com/AGLOP-1354"
+            target="_blank"
+            className={classNames(classes.githubLink, classes.headerRightItem)}
+          >
             <IconBrandGithubFilled width="1rem" height="1rem" />
           </Link>
 
           {!isMobile && (
-          <Link href="/history/create" className={classNames(classes.writeHistory, classes.headerRightItem)}>
+            <Link href="/history/create" className={classNames(classes.writeHistory, classes.headerRightItem)}>
               <Button type="text" style={{ padding: 0 }}>
                 <IconEdit />
               </Button>

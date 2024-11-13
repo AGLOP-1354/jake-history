@@ -37,7 +37,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
     "jsx-a11y/click-events-have-key-events": "off",
-    "@typescript-eslint/no-explicit-any": 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "jsx-a11y/no-static-element-interactions": "off"
   },
   "settings": {
     "react": {

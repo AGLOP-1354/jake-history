@@ -52,40 +52,46 @@ const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
               [classes.tableOfContentsItemH3]: tag === "H3",
             })}
           >
-            <Button type="text" onClick={() => scrollToSection(id)}>{text}</Button>
+            <Button type="text" onClick={() => scrollToSection(id)}>
+              {text}
+            </Button>
           </li>
         ))}
       </ul>
     </>
-  )
+  );
 
   if (width <= 992) {
     return (
       <>
         <div className={classes.tableOfContentsMobile}>
-          <IconMenuDeep className={classNames(classes.tableOfContentsMobileIcon, {
-            [classes.tableOfContentsMobileIconActive]: isOpen,
-          })} onClick={() => setIsOpen(prev => !prev)} />
+          <IconMenuDeep
+            className={classNames(classes.tableOfContentsMobileIcon, {
+              [classes.tableOfContentsMobileIconActive]: isOpen,
+            })}
+            onClick={() => setIsOpen((prev) => !prev)}
+          />
 
-          <div className={classNames(classes.tableOfContentsMobileContent, {
-            [classes.tableOfContentsMobileContentOpen]: isOpen,
-          })}>
+          <div
+            className={classNames(classes.tableOfContentsMobileContent, {
+              [classes.tableOfContentsMobileContentOpen]: isOpen,
+            })}
+          >
             {tableOfContents}
           </div>
         </div>
 
-        <div className={classNames(classes.tableOfContentsMobileOverlay, {
-          [classes.tableOfContentsMobileOverlayActive]: isOpen,
-        })} onClick={() => setIsOpen(false)} />
+        <div
+          className={classNames(classes.tableOfContentsMobileOverlay, {
+            [classes.tableOfContentsMobileOverlayActive]: isOpen,
+          })}
+          onClick={() => setIsOpen(false)}
+        />
       </>
     );
   }
 
-  return (
-    <aside className={classes.TableOfContents}>
-      {tableOfContents}
-    </aside>
-  );
+  return <aside className={classes.TableOfContents}>{tableOfContents}</aside>;
 };
 
 export default TableOfContents;
