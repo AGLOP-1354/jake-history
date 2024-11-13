@@ -5,13 +5,13 @@ import { IconPhotoScan } from "@tabler/icons-react";
 import { HistoryType } from "@/src/lib/types/history";
 import getContrastingTextColor from "@/src/lib/utils/getContrastingTextColor";
 
-import classes from "./history.module.css";
+import classes from "./historyCard.module.css";
 
-const History = ({ id, title, imageUrl, summary, content, category }: HistoryType) => {
+const HistoryCard = ({ id, title, imageUrl, summary, content, category }: HistoryType) => {
   const contrastingTextColor = getContrastingTextColor(category?.color || "#000000");
 
   return (
-    <div className={classes.History}>
+    <div className={classes.HistoryCard}>
       <Link href={`/history/${id}`} className={classes.link}>
         <div className={classes.historyImage}>
           {imageUrl ? (
@@ -40,4 +40,4 @@ const History = ({ id, title, imageUrl, summary, content, category }: HistoryTyp
   );
 };
 
-export default History;
+export default HistoryCard;

@@ -1,8 +1,4 @@
-.link {
-  text-decoration: none;
-}
-
-.History {
+.HistoryCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,6 +10,15 @@
   height: 100%;
   max-height: 363px;
   position: relative;
+  transition: transform 0.2s ease-in-out;
+}
+
+.HistoryCard:hover {
+  transform: scale(1.1);
+}
+
+.link {
+  text-decoration: none;
 }
 
 .historyImage {

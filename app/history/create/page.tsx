@@ -3,6 +3,8 @@ import type { CategoryType } from "@/src/lib/types/category";
 
 import HistoryEditor from "./_components/HistoryEditor";
 
+export const dynamic = "force-dynamic";
+
 const CreateHistoryPage = async () => {
   const categories: CategoryType[] = await getFetch({
     url: "/api/category/all",

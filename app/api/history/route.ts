@@ -40,16 +40,21 @@ export async function POST(request: Request) {
   }
 }
 
-// export async function GET(request: Request) {
-export async function GET() {
+export async function GET(request: Request) {
   await dbConnect();
 
+  const { searchParams } = new URL(request.url);
+  const sortKey = searchParams.get("sortKey");
+
   try {
+    const sortOptions: { [key: string]: 1 | -1 } =
+      sortKey === "latest" ? { createdAt: -1 } : sortKey === "name" ? { title: 1 } : {};
+
     const histories = await History.find({
       deletedAt: null,
     })
       .populate("category")
-      .sort({ updatedAt: -1 });
+      .sort(sortOptions);
 
     return NextResponse.json(histories, { status: 200 });
   } catch (error) {

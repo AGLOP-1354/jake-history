@@ -8,7 +8,7 @@ const Error = ({ error }: { error: Error }) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "calc(100vh - 71px)",
+        height: "calc(100vh - 56px)",
         gap: "1rem",
       }}
     >

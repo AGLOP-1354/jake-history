@@ -1,8 +1,38 @@
+.Wrapper {
+  position: relative;
+  height: calc(100vh - 56px);
+}
+
 .Home {
   max-width: 90rem;
   width: 90rem;
   padding: 36px;
   margin: auto;
+}
+
+.sortWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.sortButton {
+  padding: 0 !important;
+  color: var(--text-200) !important;
+}
+
+.sortButton:hover {
+  color: var(--text-100) !important;
+}
+
+.activeSortButton {
+  color: var(--text-100) !important;
+}
+
+.historyCardList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: flex-start;

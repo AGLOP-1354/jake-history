@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
-  max-width: 1200px;
+  padding: 0 24px;
+  max-width: 90rem;
   margin: auto;
+  height: 56px;
 }
 
 .pageTitle {
@@ -22,8 +23,4 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.searchIcon {
-  cursor: pointer;
 }
