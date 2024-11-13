@@ -1,9 +1,12 @@
 "use client";
+import { useState } from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
+import { IconMenuDeep } from "@tabler/icons-react";
 
 import Divider from "@/src/components/display/divider";
 import Button from "@/src/components/interactive/button";
+import useViewport from "@/src/lib/hooks/useViewport";
 
 import classes from "../_styles/tableOfContents.module.css";
 
@@ -18,6 +21,10 @@ type Props = {
 };
 
 const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { width } = useViewport();
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -26,8 +33,8 @@ const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
     }
   };
 
-  return (
-    <aside className={classes.TableOfContents}>
+  const tableOfContents = (
+    <>
       <div className={classes.tableOfContentsDate}>
         <div>생성: {dayjs(createdAt).format("YYYY년 MM월 DD일")}</div>
         <div>분량: {ammountOfLetters}</div>
@@ -49,6 +56,34 @@ const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
           </li>
         ))}
       </ul>
+    </>
+  )
+
+  if (width <= 1580) {
+    return (
+      <>
+        <div className={classes.tableOfContentsMobile}>
+          <IconMenuDeep className={classNames(classes.tableOfContentsMobileIcon, {
+            [classes.tableOfContentsMobileIconActive]: isOpen,
+          })} onClick={() => setIsOpen(prev => !prev)} />
+
+          <div className={classNames(classes.tableOfContentsMobileContent, {
+            [classes.tableOfContentsMobileContentOpen]: isOpen,
+          })}>
+            {tableOfContents}
+          </div>
+        </div>
+
+        <div className={classNames(classes.tableOfContentsMobileOverlay, {
+          [classes.tableOfContentsMobileOverlayActive]: isOpen,
+        })} onClick={() => setIsOpen(false)} />
+      </>
+    );
+  }
+
+  return (
+    <aside className={classes.TableOfContents}>
+      {tableOfContents}
     </aside>
   );
 };
