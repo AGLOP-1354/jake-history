@@ -69,3 +69,9 @@
   background-color: #4493f8;
   transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+  .Header {
+    padding-left: 0;
+  }
+}

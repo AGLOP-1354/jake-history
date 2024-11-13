@@ -8,3 +8,10 @@
   display: flex;
   gap: 3rem;
 }
+
+@media (max-width: 500px) {
+  .HistoryDetail {
+    max-width: 90svw;
+    gap: 0;
+  }
+}

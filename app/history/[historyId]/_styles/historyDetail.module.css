@@ -2,7 +2,6 @@
   flex: 1;
   display: flex;
   gap: 3rem;
-  /* position: relative; */
   overflow-y: scroll;
   padding: 3rem 0 0;
 }
@@ -33,4 +32,11 @@
   object-fit: cover;
   object-position: center;
   padding: 0 !important;
+}
+
+@media (max-width: 500px) {
+  .HistoryDetail {
+    gap: 0;
+    padding-top: 6rem;
+  }
 }

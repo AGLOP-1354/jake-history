@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { IconBrandGithubFilled, IconEdit } from "@tabler/icons-react";
 
 import Button from "@/src/components/interactive/button";
+import useViewport from "@/src/lib/hooks/useViewport";
 
 import classes from "./page.module.css";
 
@@ -14,6 +15,7 @@ const NOT_RENDERED_PATHNAME = ["/history/create"];
 
 const Header = () => {
   const pathname = usePathname();
+  const { isMobile } = useViewport()
 
   if (NOT_RENDERED_PATHNAME.includes(pathname)) return <></>;
 
@@ -34,11 +36,13 @@ const Header = () => {
             <IconBrandGithubFilled width="1rem" height="1rem" />
           </Link>
 
+          {!isMobile && (
           <Link href="/history/create" className={classNames(classes.writeHistory, classes.headerRightItem)}>
-            <Button type="text" style={{ padding: 0 }}>
-              <IconEdit />
-            </Button>
-          </Link>
+              <Button type="text" style={{ padding: 0 }}>
+                <IconEdit />
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </header>

@@ -67,4 +67,10 @@
     grid-template-columns: repeat(1, 1fr);
     max-width: 90svw;
   }
+
+  .Home {
+    width: 90svw;
+    max-width: 90svw;
+    padding: 2rem 0 10rem;
+  }
 }

@@ -59,7 +59,7 @@ const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
     </>
   )
 
-  if (width <= 1580) {
+  if (width <= 992) {
     return (
       <>
         <div className={classes.tableOfContentsMobile}>
