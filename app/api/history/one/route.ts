@@ -13,11 +13,11 @@ export async function GET(request: Request) {
     const history = await History.findOne({
       id,
       deletedAt: null,
-    });
+    }).populate("category");
 
     return NextResponse.json(history, { status: 200 });
   } catch (error) {
-    console.error("Error fetching histories:", error);
-    return NextResponse.json({ message: "Failed to fetch histories" }, { status: 500 });
+    console.error("Error fetching history by id:", error);
+    return NextResponse.json({ message: "Failed to fetch history by id" }, { status: 500 });
   }
 }

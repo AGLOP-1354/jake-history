@@ -1,7 +1,10 @@
 .HistoryDetail {
+  flex: 1;
   display: flex;
   gap: 3rem;
   position: relative;
+  overflow-y: scroll;
+  margin: 3rem 0;
 }
 
 .historyTitle {

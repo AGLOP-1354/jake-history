@@ -1,9 +1,10 @@
 .HistoryDetail {
   width: 100%;
   max-width: 80svw;
-  margin: 3rem auto;
-  min-height: calc(100vh - 56px - 88px);
+  margin: auto;
+  min-height: calc(100vh - 56px);
+  max-height: calc(100vh - 56px);
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  gap: 3rem;
 }
