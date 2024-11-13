@@ -27,8 +27,8 @@
 
 @media (max-width: 1440px) {
   .Home {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 50rem;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 90svw;
   }
 }
 

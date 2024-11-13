@@ -4,13 +4,15 @@ import classes from "./divider.module.css";
 
 type Props = {
   noMargin?: boolean;
+  color?: string;
 };
 
-const Divider = ({ noMargin }: Props) => (
+const Divider = ({ color, noMargin }: Props) => (
   <div
     className={classNames(classes.Divider, {
       [classes.noMargin]: noMargin,
     })}
+    style={{ ...(color ? { backgroundColor: color } : {}) }}
   />
 );
 

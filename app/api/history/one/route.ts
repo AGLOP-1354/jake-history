@@ -14,7 +14,6 @@ export async function GET(request: Request) {
       id,
       deletedAt: null,
     });
-    console.log("history", history);
 
     return NextResponse.json(history, { status: 200 });
   } catch (error) {

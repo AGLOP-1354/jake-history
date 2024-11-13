@@ -1,0 +1,49 @@
+.TableOfContents {
+  width: 200px;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tableOfContentsDate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-200);
+}
+
+.tableOfContentsTitle {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: var(--text-100);
+}
+
+.tableOfContentsList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.tableOfContentsItem {
+  color: var(--text-200) !important;
+}
+
+.tableOfContentsItem:hover {
+  color: var(--text-100) !important;
+}
+
+.tableOfContentsItemH3 {
+  margin-left: 1rem;
+}
+
+.tableOfContentsItem button {
+  all: unset;
+}

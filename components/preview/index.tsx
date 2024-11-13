@@ -17,34 +17,6 @@ type Props = {
 
 const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
   const [isClient, setIsClient] = useState(false);
-  const [toc, setToc] = useState([]);
-  const [processedContent, setProcessedContent] = useState(content);
-
-  useEffect(() => {
-    const tempElement = document.createElement("div");
-    tempElement.innerHTML = content;
-
-    const headings = Array.from(tempElement.querySelectorAll("h1, h2"));
-    const tocItems = headings.map((heading, index) => {
-      const id = `heading-${index}`;
-      heading.id = id;
-      return {
-        id,
-        text: heading.innerText,
-        tag: heading.tagName,
-      };
-    });
-
-    setToc(tocItems);
-    setProcessedContent(tempElement.innerHTML);
-  }, [content]);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   useEffect(() => {
     setIsClient(true);
@@ -60,21 +32,8 @@ const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
 
   return (
     <div className={classes.preview} style={style || {}}>
-      <nav style={{ width: "200px", marginRight: "20px" }}>
-        <h3>목차</h3>
-        <ul>
-          {toc.map(({ id, text, tag }) => (
-            <li key={id} style={{ marginLeft: tag === "H2" ? "20px" : "0" }}>
-              <button onClick={() => scrollToSection(id)} style={{ all: "unset", cursor: "pointer", color: "blue" }}>
-                {text}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
       {!onlyContent && <h1 className={classes.storyTitle}>{storyTitle}</h1>}
-      <span dangerouslySetInnerHTML={{ __html: processedContent }} />
+      <span dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );
 };

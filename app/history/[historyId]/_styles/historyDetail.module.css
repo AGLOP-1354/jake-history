@@ -1,0 +1,28 @@
+.HistoryDetail {
+  display: flex;
+  gap: 3rem;
+  position: relative;
+}
+
+.historyTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.content,
+.contentBody {
+  flex: 1;
+}
+
+.historyDetailImage {
+  position: relative;
+  width: calc(100% - 3rem);
+  height: 349.93px;
+  margin: 0 1.5rem 3rem;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
