@@ -22,3 +22,8 @@
   color: var(--text-200);
   font-size: 0.75rem;
 }
+
+.Navbar__listItemActive {
+  color: var(--text-100);
+  font-weight: bold;
+}

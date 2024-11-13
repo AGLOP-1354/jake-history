@@ -1,10 +1,11 @@
 "use client";
 import classNames from "classnames";
+import dayjs from "dayjs";
 
 import Divider from "@/src/components/display/divider";
+import Button from "@/src/components/interactive/button";
 
 import classes from "../_styles/tableOfContents.module.css";
-import dayjs from "dayjs";
 
 type Props = {
   toc: {
@@ -44,7 +45,7 @@ const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
               [classes.tableOfContentsItemH3]: tag === "H3",
             })}
           >
-            <button onClick={() => scrollToSection(id)}>{text}</button>
+            <Button type="text" onClick={() => scrollToSection(id)}>{text}</Button>
           </li>
         ))}
       </ul>

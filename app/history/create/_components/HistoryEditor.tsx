@@ -105,7 +105,7 @@ const HistoryEditor = ({ categories }: { categories: CategoryType[] }) => {
         </div>
       </div>
 
-      <Preview content={content} storyTitle={storyTitle} />
+      <Preview content={content} storyTitle={storyTitle} style={{ margin: 0 }} />
 
       <Drawer onClose={onCloseHistoryOptionsSettingDrawer} open={isHistoryOptionsSettingDrawerOpened}>
         <HistoryOptionSetting

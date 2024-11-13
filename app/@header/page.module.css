@@ -1,3 +1,9 @@
+.HeaderWrapper {
+  width: 100%;
+  background-color: var(--bg-100);
+  border-bottom: 1px solid var(--bg-300);
+}
+
 .Header {
   display: flex;
   align-items: center;
@@ -6,8 +12,6 @@
   max-width: 90rem;
   margin: auto;
   height: 56px;
-  background-color: var(--bg-100);
-  border-bottom: 1px solid var(--bg-300);
 }
 
 .pageTitle {

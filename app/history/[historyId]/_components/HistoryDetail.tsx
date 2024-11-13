@@ -68,7 +68,6 @@ const HistoryDetail = ({ content, title, imageUrl, createdAt }: Props) => {
             storyTitle={title}
             onlyContent={true}
             style={{
-              padding: "12px 0",
               background: "var(--bg-100)",
             }}
           />

@@ -33,3 +33,7 @@
 .toastui-editor-defaultUI .toastui-editor-toolbar svg {
   fill: #ffffff; /* 아이콘 색상을 흰색으로 변경 */
 }
+
+.toastui-editor-md-preview {
+  display: none;
+}

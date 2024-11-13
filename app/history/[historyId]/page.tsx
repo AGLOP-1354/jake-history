@@ -35,7 +35,7 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
 
   return (
     <div className={classes.HistoryDetail}>
-      <Navbar historiesByCategory={historiesByCategory} />
+      <Navbar historiesByCategory={historiesByCategory} historyId={historyId} />
 
       <HistoryDetail content={content} title={title} imageUrl={imageUrl} createdAt={createdAt} />
     </div>

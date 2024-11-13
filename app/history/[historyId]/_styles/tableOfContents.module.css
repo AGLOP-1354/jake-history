@@ -33,6 +33,11 @@
 }
 
 .tableOfContentsItem {
+  white-space: nowrap;
+  width: 200px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--text-200) !important;
 }
 
@@ -45,5 +50,18 @@
 }
 
 .tableOfContentsItem button {
-  all: unset;
+  color: var(--text-200);
+  padding: 0;
+  text-align: left;
+  width: 100%;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  display: block;
+}
+
+.tableOfContentsItemH3 button {
+  max-width: calc(200px - 1rem);
 }

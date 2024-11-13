@@ -17,22 +17,24 @@ const Header = () => {
   if (NOT_RENDERED_PATHNAME.includes(pathname)) return <></>;
 
   return (
-    <header className={classes.Header}>
-      <Link href="/" className={classes.link}>
-        <Image src="/images/jake-history.png" alt="Jake History" width={56} height={56} quality={100} />
-        <h1 className={classes.pageTitle}>
-          Jake
-          <br />
-          History
-        </h1>
-      </Link>
-
-      <div className={classes.headerRightItems}>
-        <Link href="/history/create">
-          <Button type="text">
-            <IconEdit />
-          </Button>
+    <header className={classes.HeaderWrapper}>
+      <div className={classes.Header}>
+        <Link href="/" className={classes.link}>
+          <Image src="/images/jake-history.png" alt="Jake History" width={56} height={56} quality={100} />
+          <h1 className={classes.pageTitle}>
+            Jake
+            <br />
+            History
+          </h1>
         </Link>
+
+        <div className={classes.headerRightItems}>
+          <Link href="/history/create">
+            <Button type="text">
+              <IconEdit />
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   );

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import classNames from "classnames";
 
 import { HistoryType } from "@/src/lib/types/history";
 import Divider from "@/src/components/display/divider";
@@ -11,9 +12,10 @@ import classes from "../_styles/navbar.module.css";
 
 type Props = {
   historiesByCategory: HistoryType[];
+  historyId: string;
 };
 
-const Navbar = ({ historiesByCategory }: Props) => {
+const Navbar = ({ historiesByCategory, historyId }: Props) => {
   const [searchValue, setSearchValue] = useState("");
 
   const filteredHistories = useMemo(() => {
@@ -34,7 +36,13 @@ const Navbar = ({ historiesByCategory }: Props) => {
 
       <div className={classes.Navbar__list}>
         {filteredHistories.map((history) => (
-          <Link href={`/history/${history.id}`} key={history.id} className={classes.Navbar__listItem}>
+          <Link
+            href={`/history/${history.id}`}
+            key={history.id}
+            className={classNames(classes.Navbar__listItem, {
+              [classes.Navbar__listItemActive]: history.id === historyId,
+            })}
+          >
             {history.title}
           </Link>
         ))}
