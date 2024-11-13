@@ -1,13 +1,14 @@
 import classNames from "classnames";
 import { IconNoteOff } from "@tabler/icons-react";
+import Link from "next/link";
 
 import { getFetch } from "@/src/lib/customFetch";
 import { HistoryType } from "@/src/lib/types/history";
+
+import Button from "../components/interactive/button";
 import HistoryCard from "../components/historyCard";
 
 import classes from "./page.module.css";
-import Button from "../components/interactive/button";
-import Link from "next/link";
 
 type Props = {
   searchParams: Promise<{

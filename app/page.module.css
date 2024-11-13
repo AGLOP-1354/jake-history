@@ -56,15 +56,15 @@
 }
 
 @media (max-width: 1440px) {
-  .Home {
+  .historyCardList {
     grid-template-columns: repeat(4, 1fr);
     max-width: 90svw;
   }
 }
 
 @media (max-width: 768px) {
-  .Home {
+  .historyCardList {
     grid-template-columns: repeat(1, 1fr);
-    max-width: 30rem;
+    max-width: 90svw;
   }
 }

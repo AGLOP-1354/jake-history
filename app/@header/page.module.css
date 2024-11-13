@@ -1,7 +1,9 @@
 .HeaderWrapper {
+  position: relative;
   width: 100%;
   background-color: var(--bg-100);
   border-bottom: 1px solid var(--bg-300);
+  z-index: 999;
 }
 
 .Header {
@@ -39,4 +41,31 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.headerRightItem {
+  transition: transform 0.1s ease-in-out;
+}
+
+.writeHistory:hover {
+  transform: scale(1.1);
+}
+
+.writeHistory:hover svg {
+  color: var(--accent-300);
+}
+
+.githubLink {
+  border-radius: 50%;
+  background-color: var(--text-100);
+  color: var(--bg-black);
+  padding: 0.1rem 0.1rem 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.githubLink:hover {
+  background-color: #4493f8;
+  transform: scale(1.1);
 }

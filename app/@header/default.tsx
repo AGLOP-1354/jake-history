@@ -3,7 +3,8 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { IconEdit } from "@tabler/icons-react";
+import classNames from "classnames";
+import { IconBrandGithubFilled, IconEdit } from "@tabler/icons-react";
 
 import Button from "@/src/components/interactive/button";
 
@@ -29,8 +30,12 @@ const Header = () => {
         </Link>
 
         <div className={classes.headerRightItems}>
-          <Link href="/history/create">
-            <Button type="text">
+          <Link href="https://github.com/AGLOP-1354" target="_blank" className={classNames(classes.githubLink, classes.headerRightItem)}>
+            <IconBrandGithubFilled width="1rem" height="1rem" />
+          </Link>
+
+          <Link href="/history/create" className={classNames(classes.writeHistory, classes.headerRightItem)}>
+            <Button type="text" style={{ padding: 0 }}>
               <IconEdit />
             </Button>
           </Link>
