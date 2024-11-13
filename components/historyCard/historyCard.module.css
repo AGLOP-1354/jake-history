@@ -90,3 +90,14 @@
   padding: 6px 8px;
   border-radius: 4px;
 }
+
+.newBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--bg-black);
+  color: var(--accent-200);
+  padding: 4px 8px;
+  border-radius: 4px 0 0 0;
+  font-size: 0.75rem;
+}
