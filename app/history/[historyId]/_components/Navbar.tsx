@@ -56,7 +56,7 @@ const Navbar = ({ historiesByCategory, historyId }: Props) => {
     </>
   );
 
-  if (width <= 1580) {
+  if (width !== 0 && width <= 1580) {
     return (
       <>
         <div className={classes.Navbar__mobile}>
