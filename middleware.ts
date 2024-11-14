@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { GUEST_TOKEN_KEY, createGuestToken, verifyGuestToken, getCookieOptions } from "./lib/utils/token";
 
-export function middleware(request: NextRequest) {
-  // 미들웨어 로직
-  return NextResponse.next();
+export async function middleware(request: NextRequest) {
+  const guestToken = request.cookies.get(GUEST_TOKEN_KEY);
+
+  if (guestToken && (await verifyGuestToken(guestToken.value))) {
+    return NextResponse.next();
+  }
+
+  const newToken = await createGuestToken();
+  const response = NextResponse.next();
+  response.cookies.set(GUEST_TOKEN_KEY, newToken, getCookieOptions());
+  return response;
 }
 
-// 미들웨어를 적용할 경로 설정 (선택사항)
 export const config = {
-  matcher: "/api/:path*",
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
