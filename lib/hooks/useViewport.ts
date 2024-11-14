@@ -10,8 +10,8 @@ type Viewport = {
 
 const useViewport = (): Viewport => {
   const [viewport, setViewport] = useState<Viewport>({
-    width: 0,
-    height: 0,
+    width: typeof window !== "undefined" ? window.innerWidth : 0,
+    height: typeof window !== "undefined" ? window.innerHeight : 0,
     isMobile: false,
   });
 
