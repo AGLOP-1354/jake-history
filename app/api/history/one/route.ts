@@ -4,12 +4,12 @@ import dbConnect from "@/src/lib/mongodb";
 import History from "@/src/models/History";
 
 export async function GET(request: Request) {
-  await dbConnect();
-
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-
   try {
+    await dbConnect();
+
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
     const history = await History.findOne({
       id,
       deletedAt: null,
@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(history, { status: 200 });
   } catch (error) {
-    console.error("Error fetching history by id:", error);
-    return NextResponse.json({ message: "Failed to fetch history by id" }, { status: 500 });
+    console.error("Error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

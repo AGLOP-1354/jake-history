@@ -2,11 +2,12 @@
 import { useState } from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
-import { IconMenuDeep } from "@tabler/icons-react";
+import { IconMenuDeep, IconThumbUp } from "@tabler/icons-react";
 
 import Divider from "@/src/components/display/divider";
 import Button from "@/src/components/interactive/button";
 import useViewport from "@/src/lib/hooks/useViewport";
+import { revalidateTag } from "@/src/lib/actions/revalidTag";
 
 import classes from "../_styles/tableOfContents.module.css";
 
@@ -18,9 +19,12 @@ type Props = {
   }[];
   createdAt: Date;
   ammountOfLetters: number;
+  likeCount: number;
+  historyId: string;
+  isLiked: boolean;
 };
 
-const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
+const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, likeCount = 0, isLiked }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { width } = useViewport();
@@ -33,11 +37,29 @@ const TableOfContents = ({ toc, createdAt, ammountOfLetters = 0 }: Props) => {
     }
   };
 
+  const handleLike = async () => {
+    await fetch("/api/like", {
+      method: "POST",
+      body: JSON.stringify({ historyId }),
+    });
+    await revalidateTag("history-by-id");
+  };
+
   const tableOfContents = (
     <>
       <div className={classes.tableOfContentsDate}>
-        <div>생성: {dayjs(createdAt).format("YYYY년 MM월 DD일")}</div>
-        <div>분량: {ammountOfLetters}</div>
+        <div
+          className={classNames(classes.tableOfContentsLike, { [classes.tableOfContentsLikeActive]: isLiked })}
+          onClick={handleLike}
+        >
+          <IconThumbUp className={classes.tableOfContentsLikeIcon} />
+          {likeCount}
+        </div>
+
+        <div className={classes.tableOfContentsDateInfo}>
+          <div>생성: {dayjs(createdAt).format("YYYY년 MM월 DD일")}</div>
+          <div>분량: {ammountOfLetters}</div>
+        </div>
       </div>
 
       <h3 className={classes.tableOfContentsTitle}>목차</h3>

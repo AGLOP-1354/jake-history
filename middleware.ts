@@ -6,7 +6,9 @@ export async function middleware(request: NextRequest) {
   const guestToken = request.cookies.get(GUEST_TOKEN_KEY);
 
   if (guestToken && (await verifyGuestToken(guestToken.value))) {
-    return NextResponse.next();
+    const response = NextResponse.next();
+    response.cookies.set(GUEST_TOKEN_KEY, guestToken.value, getCookieOptions());
+    return response;
   }
 
   const newToken = await createGuestToken();

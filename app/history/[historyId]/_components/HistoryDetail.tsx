@@ -15,13 +15,16 @@ type tocItems = {
 }[];
 
 type Props = {
+  historyId: string;
   content: string;
   title: string;
   imageUrl?: string;
   createdAt: Date;
+  likeCount: number;
+  isLiked: boolean;
 };
 
-const HistoryDetail = ({ content, title, imageUrl, createdAt }: Props) => {
+const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, likeCount, isLiked }: Props) => {
   const [toc, setToc] = useState<tocItems>([]);
   const [processedContent, setProcessedContent] = useState(content);
 
@@ -75,7 +78,14 @@ const HistoryDetail = ({ content, title, imageUrl, createdAt }: Props) => {
         </div>
       </div>
 
-      <TableOfContents toc={toc} createdAt={createdAt} ammountOfLetters={ammountOfLetters} />
+      <TableOfContents
+        historyId={historyId}
+        toc={toc}
+        createdAt={createdAt}
+        ammountOfLetters={ammountOfLetters}
+        likeCount={likeCount}
+        isLiked={isLiked}
+      />
     </div>
   );
 };

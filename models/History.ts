@@ -9,6 +9,7 @@ interface IHistory extends Document {
   content: string;
   imageUrl?: string;
   summary?: string;
+  likeCount: number;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
@@ -50,6 +51,11 @@ const HistorySchema = new mongoose.Schema<IHistory>(
       default: null,
       sparse: true,
     },
+    likeCount: {
+      type: Number,
+      default: 0,
+      index: true,
+    },
   },
   {
     timestamps: true,
@@ -59,6 +65,7 @@ const HistorySchema = new mongoose.Schema<IHistory>(
 HistorySchema.index({ title: "text", content: "text" });
 HistorySchema.index({ createdAt: -1 });
 HistorySchema.index({ title: 1, createdAt: -1 });
+HistorySchema.index({ likeCount: -1, createdAt: -1 });
 
 const History = getModel<IHistory>("History", HistorySchema);
 export default History;

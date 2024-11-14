@@ -7,6 +7,7 @@ import HistoryDetail from "./_components/HistoryDetail";
 import Navbar from "./_components/Navbar";
 
 import classes from "./page.module.css";
+import { getGuestToken } from "@/src/lib/utils/token";
 
 type Props = {
   params: Promise<{ historyId: string }>;
@@ -18,11 +19,15 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
     notFound();
   }
 
+  const guestToken = getGuestToken();
   let historiesByCategory: HistoryType[] = [];
 
-  const { title, content, imageUrl, createdAt, category }: HistoryType = await getFetch({
+  const { title, content, imageUrl, createdAt, category, likeCount }: HistoryType = await getFetch({
     url: "/api/history/one",
     queryParams: { id: historyId },
+    options: {
+      next: { tags: ["history-by-id"] },
+    },
   });
 
   if (category) {
@@ -33,11 +38,27 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
     historiesByCategory = _historiesByCategory as HistoryType[];
   }
 
+  const isLiked = (await getFetch({
+    url: "/api/like/validate",
+    queryParams: { historyId, guestToken },
+    options: {
+      cache: "no-cache",
+    },
+  })) as boolean;
+
   return (
     <div className={classes.HistoryDetail}>
       <Navbar historiesByCategory={historiesByCategory} historyId={historyId} />
 
-      <HistoryDetail content={content} title={title} imageUrl={imageUrl} createdAt={createdAt} />
+      <HistoryDetail
+        historyId={historyId}
+        content={content}
+        title={title}
+        imageUrl={imageUrl}
+        createdAt={createdAt}
+        likeCount={likeCount}
+        isLiked={isLiked}
+      />
     </div>
   );
 };

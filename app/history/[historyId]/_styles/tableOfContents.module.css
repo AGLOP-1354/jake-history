@@ -12,10 +12,38 @@
 .tableOfContentsDate {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
   font-size: 0.75rem;
   margin-bottom: 0.5rem;
   color: var(--text-200);
+}
+
+.tableOfContentsLike {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.tableOfContentsLikeActive,
+.tableOfContentsLikeActive .tableOfContentsLikeIcon {
+  color: var(--accent-300);
+}
+
+.tableOfContentsLikeActive .tableOfContentsLikeIcon {
+  fill: var(--accent-300) !important;
+}
+
+.tableOfContentsLike:hover {
+  color: var(--accent-300);
+}
+
+.tableOfContentsDateInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .tableOfContentsTitle {

@@ -8,6 +8,7 @@ export type HistoryType = {
   imageUrl?: string;
   summary?: string;
   category?: CategoryType;
+  likeCount: number;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;

@@ -24,6 +24,7 @@ const getFetch = async <T>({ url, queryParams, options }: FetchOptions): Promise
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       ...options,
     });
 
