@@ -1,5 +1,7 @@
-import mongoose, { Document, Model } from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
+
+import { getModel } from "./mongoose";
 
 interface ICategory extends Document {
   id: string;
@@ -41,5 +43,5 @@ CategorySchema.index({ name: 1, createdAt: -1 });
 CategorySchema.index({ name: "text" });
 CategorySchema.index({ name: 1, id: 1 }, { unique: true });
 
-const Category: Model<ICategory> = mongoose.models.Category || mongoose.model<ICategory>("Category", CategorySchema);
+const Category = getModel<ICategory>("Category", CategorySchema);
 export default Category;

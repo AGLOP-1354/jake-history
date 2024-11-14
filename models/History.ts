@@ -1,5 +1,7 @@
-import mongoose, { Document, Model } from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
+
+import { getModel } from "./mongoose";
 
 interface IHistory extends Document {
   id: string;
@@ -58,5 +60,5 @@ HistorySchema.index({ title: "text", content: "text" });
 HistorySchema.index({ createdAt: -1 });
 HistorySchema.index({ title: 1, createdAt: -1 });
 
-const History: Model<IHistory> = mongoose.models.History || mongoose.model<IHistory>("History", HistorySchema);
+const History = getModel<IHistory>("History", HistorySchema);
 export default History;
