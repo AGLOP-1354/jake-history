@@ -51,7 +51,7 @@
 
 @supports (width: 50svh) {
   .Modal {
-    min-width: 50svw;
+    min-width: 50vw;
     min-height: 50svh;
   }
 }

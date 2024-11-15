@@ -106,11 +106,11 @@
 }
 
 .tableOfContentsMobileContent {
-  position: absolute;
+  position: fixed;
   top: 56px;
   width: 200px;
   right: -200px;
-  overflow: hidden;
+  overflow-y: auto;
   background-color: var(--bg-100);
   height: calc(100vh - 56px);
   z-index: 1;

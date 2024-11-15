@@ -58,19 +58,19 @@
 @media (max-width: 1440px) {
   .historyCardList {
     grid-template-columns: repeat(3, 1fr);
-    max-width: 90svw;
+    max-width: 90vw;
   }
 }
 
 @media (max-width: 768px) {
   .historyCardList {
     grid-template-columns: repeat(1, 1fr);
-    max-width: 90svw;
+    max-width: 90vw;
   }
 
   .Home {
-    width: 90svw;
-    max-width: 90svw;
+    width: 90vw;
+    max-width: 90vw;
     padding: 2rem 0 10rem;
   }
 
