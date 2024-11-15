@@ -57,7 +57,7 @@
 
 @media (max-width: 1440px) {
   .historyCardList {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     max-width: 90svw;
   }
 }
@@ -72,5 +72,9 @@
     width: 90svw;
     max-width: 90svw;
     padding: 2rem 0 10rem;
+  }
+
+  .sortWrapper {
+    justify-content: flex-start;
   }
 }

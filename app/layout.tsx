@@ -28,6 +28,7 @@ export default function RootLayout({ children, header }: Readonly<Props>) {
   return (
     <html lang="en">
       <head>
+        <meta charSet="utf-8" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" />
         <title>jake history</title>
       </head>

@@ -47,12 +47,20 @@ const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, like
     await revalidateTag("history-by-id");
   };
 
+  const handleUnlike = async () => {
+    await fetch("/api/like", {
+      method: "PUT",
+      body: JSON.stringify({ historyId }),
+    });
+    await revalidateTag("history-by-id");
+  };
+
   const tableOfContents = (
     <>
       <div className={classes.tableOfContentsDate}>
         <div
           className={classNames(classes.tableOfContentsLike, { [classes.tableOfContentsLikeActive]: isLiked })}
-          onClick={handleLike}
+          onClick={isLiked ? handleUnlike : handleLike}
         >
           <IconThumbUp className={classes.tableOfContentsLikeIcon} />
           {likeCount}

@@ -62,3 +62,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Failed to create like" }, { status: 500 });
   }
 }
+
+export async function PUT(request: Request) {
+  await dbConnect();
+
+  const { historyId }: { historyId: string } = await request.json();
+
+  if (!historyId) {
+    return NextResponse.json({ message: "historyId is required" }, { status: 400 });
+  }
+
+  const guestToken = getGuestToken();
+
+  if (!guestToken) {
+    return NextResponse.json({ message: "Guest token is required" }, { status: 400 });
+  }
+
+  try {
+    await Like.deleteOne({ historyId, guestToken });
+    await History.findOneAndUpdate({ id: historyId }, { $inc: { likeCount: -1 } });
+  } catch (error) {
+    console.error("Error deleting like:", error);
+  }
+}
