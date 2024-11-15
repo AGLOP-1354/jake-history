@@ -19,7 +19,7 @@ type Props = {
 const Navbar = ({ historiesByCategory, historyId }: Props) => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [clientWidth, setClientWidth] = useState(0);
+  const [clientWidth, setClientWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     setClientWidth(window.innerWidth);
@@ -58,7 +58,7 @@ const Navbar = ({ historiesByCategory, historyId }: Props) => {
     </>
   );
 
-  if (clientWidth !== 0 && clientWidth <= 1580) {
+  if (clientWidth <= 1580) {
     return (
       <>
         <div className={classes.Navbar__mobile}>

@@ -25,7 +25,7 @@ type Props = {
 
 const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, likeCount = 0, isLiked }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [clientWidth, setClientWidth] = useState(0);
+  const [clientWidth, setClientWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     setClientWidth(window.innerWidth);

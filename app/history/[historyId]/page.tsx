@@ -2,12 +2,12 @@ import { notFound } from "next/navigation";
 
 import { getFetch } from "@/src/lib/customFetch";
 import { HistoryType } from "@/src/lib/types/history";
+import { getGuestToken } from "@/src/lib/utils/token";
 
 import HistoryDetail from "./_components/HistoryDetail";
 import Navbar from "./_components/Navbar";
 
 import classes from "./page.module.css";
-import { getGuestToken } from "@/src/lib/utils/token";
 
 type Props = {
   params: Promise<{ historyId: string }>;

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import hljs from "highlight.js";
 
 import classes from "./preview.module.css";
@@ -16,19 +16,25 @@ type Props = {
 };
 
 const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
-  // const [isClient, setIsClient] = useState(false);
-
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    //   if (isClient) {
-    hljs.highlightAll();
-    //   }
-  }, [content]);
+    setIsClient(true);
+  }, []);
 
-  // if (!isClient) return null;
+  useEffect(() => {
+    if (isClient && content) {
+      hljs.highlightAll();
+    }
+  }, [content, isClient]);
+
+  console.log("content", content);
+  if (!content || typeof content !== "string") {
+    console.error("content is not a string");
+    return null;
+  }
+
+  if (!isClient) return null;
 
   return (
     <div className={classes.preview} style={style || {}}>
