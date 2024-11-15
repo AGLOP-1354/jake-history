@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import hljs from "highlight.js";
+// import React, { useEffect, useState } from "react";
+// import hljs from "highlight.js";
 
 import classes from "./preview.module.css";
 
-import "highlight.js/styles/atom-one-dark.css"; // atom-one-dark 다크 테마
+// import "highlight.js/styles/atom-one-dark.css"; // atom-one-dark 다크 테마
 
 type Props = {
   content: string;
@@ -16,19 +16,19 @@ type Props = {
 };
 
 const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
-  useEffect(() => {
-    if (isClient) {
-      hljs.highlightAll();
-    }
-  }, [content, isClient]);
+  // useEffect(() => {
+  //   if (isClient) {
+  //     hljs.highlightAll();
+  //   }
+  // }, [content, isClient]);
 
-  if (!isClient) return null;
+  // if (!isClient) return null;
 
   return (
     <div className={classes.preview} style={style || {}}>
