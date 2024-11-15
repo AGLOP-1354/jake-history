@@ -46,7 +46,7 @@ const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
   }, []);
 
   useEffect(() => {
-    hljs.highlightAll();
+    hljs.initHighlighting();
   }, [content]);
 
   return (
