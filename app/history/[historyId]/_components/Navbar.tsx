@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import { IconMenu2 } from "@tabler/icons-react";
@@ -8,7 +8,6 @@ import { IconMenu2 } from "@tabler/icons-react";
 import Divider from "@/src/components/display/divider";
 import Input from "@/src/components/interactive/input";
 import { HistoryType } from "@/src/lib/types/history";
-import useViewport from "@/src/lib/hooks/useViewport";
 
 import classes from "../_styles/navbar.module.css";
 
@@ -20,12 +19,15 @@ type Props = {
 const Navbar = ({ historiesByCategory, historyId }: Props) => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [clientWidth, setClientWidth] = useState(0);
+
+  useEffect(() => {
+    setClientWidth(window.innerWidth);
+  }, []);
 
   const filteredHistories = useMemo(() => {
     return historiesByCategory.filter((history) => history.title.includes(searchValue));
   }, [searchValue, historiesByCategory]);
-
-  const { width } = useViewport();
 
   const navbarContent = (
     <>
@@ -56,7 +58,7 @@ const Navbar = ({ historiesByCategory, historyId }: Props) => {
     </>
   );
 
-  if (width !== 0 && width <= 1580) {
+  if (clientWidth !== 0 && clientWidth <= 1580) {
     return (
       <>
         <div className={classes.Navbar__mobile}>

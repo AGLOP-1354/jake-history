@@ -1,12 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import { IconMenuDeep, IconThumbUp } from "@tabler/icons-react";
 
 import Divider from "@/src/components/display/divider";
 import Button from "@/src/components/interactive/button";
-import useViewport from "@/src/lib/hooks/useViewport";
 import { revalidateTag } from "@/src/lib/actions/revalidTag";
 
 import classes from "../_styles/tableOfContents.module.css";
@@ -26,8 +25,11 @@ type Props = {
 
 const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, likeCount = 0, isLiked }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [clientWidth, setClientWidth] = useState(0);
 
-  const { width } = useViewport();
+  useEffect(() => {
+    setClientWidth(window.innerWidth);
+  }, []);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -83,7 +85,7 @@ const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, like
     </>
   );
 
-  if (width !== 0 && width <= 992) {
+  if (clientWidth !== 0 && clientWidth <= 992) {
     return (
       <>
         <div className={classes.tableOfContentsMobile}>
