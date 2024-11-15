@@ -2,6 +2,19 @@
 import React, { useEffect, useState } from "react";
 import hljs from "highlight.js";
 
+import sql from "highlight.js/lib/languages/sql";
+import javascript from "highlight.js/lib/languages/javascript";
+import c from "highlight.js/lib/languages/c";
+import css from "highlight.js/lib/languages/css";
+import scss from "highlight.js/lib/languages/scss";
+import shell from "highlight.js/lib/languages/shell";
+import python from "highlight.js/lib/languages/python";
+import powershell from "highlight.js/lib/languages/powershell";
+import cpp from "highlight.js/lib/languages/cpp";
+import php from "highlight.js/lib/languages/php";
+import phpTemplate from "highlight.js/lib/languages/php-template";
+import xml from "highlight.js/lib/languages/xml";
+
 import classes from "./preview.module.css";
 
 import "highlight.js/styles/atom-one-dark.css"; // atom-one-dark 다크 테마
@@ -16,25 +29,25 @@ type Props = {
 };
 
 const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
-  const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
-    setIsClient(true);
+    hljs.registerLanguage("sql", sql);
+    hljs.registerLanguage("javascript", javascript);
+    hljs.registerLanguage("python", python);
+    hljs.registerLanguage("c", c);
+    hljs.registerLanguage("cpp", cpp);
+    hljs.registerLanguage("powershell", powershell);
+    hljs.registerLanguage("shell", shell);
+    hljs.registerLanguage("scss", scss);
+    hljs.registerLanguage("css", css);
+    hljs.registerLanguage("php", php);
+    hljs.registerLanguage("php-template", phpTemplate);
+    hljs.registerLanguage("html", xml);
+    hljs.registerLanguage("xml", xml);
   }, []);
 
   useEffect(() => {
-    if (isClient && content) {
-      hljs.highlightAll();
-    }
-  }, [content, isClient]);
-
-  console.log("content", content);
-  if (!content || typeof content !== "string") {
-    console.error("content is not a string");
-    return null;
-  }
-
-  if (!isClient) return null;
+    hljs.highlightAll();
+  }, [content]);
 
   return (
     <div className={classes.preview} style={style || {}}>
