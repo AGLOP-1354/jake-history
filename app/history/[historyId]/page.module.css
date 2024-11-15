@@ -2,8 +2,8 @@
   width: 100%;
   max-width: 80vw;
   margin: auto;
-  min-height: calc(100vh - 56px);
-  max-height: calc(100vh - 56px);
+  min-height: calc(100svh - 56px);
+  max-height: calc(100svh - 56px);
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;

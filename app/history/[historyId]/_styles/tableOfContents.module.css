@@ -112,7 +112,7 @@
   right: -200px;
   overflow-y: auto;
   background-color: var(--bg-100);
-  height: calc(100vh - 56px);
+  height: calc(100svh - 56px);
   z-index: 1;
   transition: right 0.3s ease;
 }
