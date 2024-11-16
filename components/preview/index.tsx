@@ -1,23 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import hljs from "highlight.js";
+import { Viewer } from "@toast-ui/react-editor";
 
-import sql from "highlight.js/lib/languages/sql";
-import javascript from "highlight.js/lib/languages/javascript";
-import c from "highlight.js/lib/languages/c";
-import css from "highlight.js/lib/languages/css";
-import scss from "highlight.js/lib/languages/scss";
-import shell from "highlight.js/lib/languages/shell";
-import python from "highlight.js/lib/languages/python";
-import powershell from "highlight.js/lib/languages/powershell";
-import cpp from "highlight.js/lib/languages/cpp";
-import php from "highlight.js/lib/languages/php";
-import phpTemplate from "highlight.js/lib/languages/php-template";
-import xml from "highlight.js/lib/languages/xml";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import "highlight.js/styles/atom-one-dark.css";
 
 import classes from "./preview.module.css";
-
-import "highlight.js/styles/atom-one-dark.css"; // atom-one-dark 다크 테마
 
 type Props = {
   content: string;
@@ -29,30 +18,41 @@ type Props = {
 };
 
 const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
-  useEffect(() => {
-    hljs.registerLanguage("sql", sql);
-    hljs.registerLanguage("javascript", javascript);
-    hljs.registerLanguage("python", python);
-    hljs.registerLanguage("c", c);
-    hljs.registerLanguage("cpp", cpp);
-    hljs.registerLanguage("powershell", powershell);
-    hljs.registerLanguage("shell", shell);
-    hljs.registerLanguage("scss", scss);
-    hljs.registerLanguage("css", css);
-    hljs.registerLanguage("php", php);
-    hljs.registerLanguage("php-template", phpTemplate);
-    hljs.registerLanguage("html", xml);
-    hljs.registerLanguage("xml", xml);
-  }, []);
+  const viewerRef = useRef<Viewer>(null);
 
   useEffect(() => {
-    hljs.initHighlighting();
+    if (viewerRef.current) {
+      viewerRef.current.getInstance().setMarkdown(content);
+      const viewerElement = viewerRef.current.getRootElement();
+
+      const lines = content.split("\n");
+      const headingIndices = lines.reduce<number[]>((acc, line, index) => {
+        if (line.match(/^##\s+(.+)$/) || line.match(/^###\s+(.+)$/)) {
+          acc.push(index);
+        }
+        return acc;
+      }, []);
+
+      const headings = viewerElement.querySelectorAll("h2, h3");
+      headings.forEach((heading, index) => {
+        heading.id = `heading-${headingIndices[index]}`;
+      });
+
+      const codeBlocks = viewerElement.querySelectorAll("pre code");
+      codeBlocks.forEach((block) => {
+        try {
+          hljs.highlightElement(block as HTMLElement);
+        } catch (error) {
+          console.error("Error highlighting code block:", error);
+        }
+      });
+    }
   }, [content]);
 
   return (
     <div className={classes.preview} style={style || {}}>
       {!onlyContent && <h1 className={classes.storyTitle}>{storyTitle}</h1>}
-      <span dangerouslySetInnerHTML={{ __html: content }} />
+      <Viewer ref={viewerRef} initialValue={content} theme="dark" />
     </div>
   );
 };

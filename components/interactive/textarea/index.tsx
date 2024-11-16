@@ -34,7 +34,7 @@ const Textarea = ({ value, onChange, placeholder, noResize, width, height, showL
         placeholder={placeholder}
         style={{ ...(height ? { height } : {}), ...(width ? { width } : {}) }}
         className={classNames(classes.Textarea, { [classes.noResize]: noResize })}
-        maxLength={maxLength} // 수정된 부분
+        maxLength={maxLength}
       />
 
       {showLength && (

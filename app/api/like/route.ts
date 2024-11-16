@@ -22,7 +22,6 @@ export async function POST(request: Request) {
   }
 
   try {
-    // 이미 좋아요를 눌렀는지 확인
     const existingLike = await Like.findOne({
       historyId,
       guestToken,
@@ -32,7 +31,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Already liked" }, { status: 400 });
     }
 
-    // 트랜잭션으로 처리
     const session = await mongoose.startSession();
     session.startTransaction();
 

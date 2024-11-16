@@ -26,25 +26,42 @@ type Props = {
 
 const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, likeCount, isLiked }: Props) => {
   const [toc, setToc] = useState<tocItems>([]);
-  const [processedContent, setProcessedContent] = useState(content);
 
   useEffect(() => {
-    const tempElement = document.createElement("div");
-    tempElement.innerHTML = content;
+    const removeMarkdown = (text: string) => {
+      return text
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+        .replace(/\*(.*?)\*/g, "$1")
+        .replace(/`(.*?)`/g, "$1")
+        .replace(/~~(.*?)~~/g, "$1")
+        .trim();
+    };
 
-    const headings = Array.from(tempElement.querySelectorAll("h2, h3"));
-    const tocItems = headings.map((heading, index) => {
-      const id = `heading-${index}`;
-      heading.id = id;
-      return {
-        id,
-        text: (heading as HTMLElement).innerText,
-        tag: heading.tagName,
-      };
-    });
+    const lines = content.split("\n");
+    const tocItems = lines
+      .map((line, index) => {
+        const h2Match = line.match(/^##\s+(.+)$/);
+        const h3Match = line.match(/^###\s+(.+)$/);
+
+        if (h2Match) {
+          return {
+            id: `heading-${index}`,
+            text: removeMarkdown(h2Match[1]),
+            tag: "H2",
+          };
+        }
+        if (h3Match) {
+          return {
+            id: `heading-${index}`,
+            text: removeMarkdown(h3Match[1]),
+            tag: "H3",
+          };
+        }
+        return null;
+      })
+      .filter((item): item is { id: string; text: string; tag: string } => item !== null);
 
     setToc(tocItems);
-    setProcessedContent(tempElement.innerHTML);
   }, [content]);
 
   const ammountOfLetters = useMemo(() => {
@@ -67,7 +84,7 @@ const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, likeCou
           )}
 
           <Preview
-            content={processedContent}
+            content={content}
             storyTitle={title}
             onlyContent={true}
             style={{

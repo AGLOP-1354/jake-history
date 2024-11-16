@@ -22,45 +22,51 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
   const guestToken = getGuestToken();
   let historiesByCategory: HistoryType[] = [];
 
-  const { title, content, imageUrl, createdAt, category, likeCount }: HistoryType = await getFetch({
-    url: "/api/history/one",
-    queryParams: { id: historyId },
-    options: {
-      next: { tags: ["history-by-id"] },
-    },
-  });
-
-  if (category) {
-    const _historiesByCategory = await getFetch({
-      url: "/api/history/category",
-      queryParams: { categoryId: category?._id || category },
+  try {
+    const { title, content, imageUrl, createdAt, category, likeCount }: HistoryType = await getFetch({
+      url: "/api/history/one",
+      queryParams: { id: historyId },
+      options: {
+        next: { tags: ["history-by-id"] },
+        cache: "no-cache",
+      },
     });
-    historiesByCategory = _historiesByCategory as HistoryType[];
+
+    if (category) {
+      const _historiesByCategory = await getFetch({
+        url: "/api/history/category",
+        queryParams: { categoryId: category?._id || category },
+      });
+      historiesByCategory = _historiesByCategory as HistoryType[];
+    }
+
+    const isLiked = (await getFetch({
+      url: "/api/like/validate",
+      queryParams: { historyId, guestToken },
+      options: {
+        cache: "no-cache",
+      },
+    })) as boolean;
+
+    return (
+      <div className={classes.HistoryDetail}>
+        <Navbar historiesByCategory={historiesByCategory} historyId={historyId} />
+
+        <HistoryDetail
+          historyId={historyId}
+          content={content}
+          title={title}
+          imageUrl={imageUrl}
+          createdAt={createdAt}
+          likeCount={likeCount}
+          isLiked={isLiked}
+        />
+      </div>
+    );
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    notFound();
   }
-
-  const isLiked = (await getFetch({
-    url: "/api/like/validate",
-    queryParams: { historyId, guestToken },
-    options: {
-      cache: "no-cache",
-    },
-  })) as boolean;
-
-  return (
-    <div className={classes.HistoryDetail}>
-      <Navbar historiesByCategory={historiesByCategory} historyId={historyId} />
-
-      <HistoryDetail
-        historyId={historyId}
-        content={content}
-        title={title}
-        imageUrl={imageUrl}
-        createdAt={createdAt}
-        likeCount={likeCount}
-        isLiked={isLiked}
-      />
-    </div>
-  );
 };
 
 export default HistoryDetailWrapper;

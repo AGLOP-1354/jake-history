@@ -19,10 +19,15 @@ type Props = {
 const Navbar = ({ historiesByCategory, historyId }: Props) => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [clientWidth, setClientWidth] = useState(window.innerWidth);
+  const [clientWidth, setClientWidth] = useState(0);
 
   useEffect(() => {
-    setClientWidth(window.innerWidth);
+    const handleResize = () => setClientWidth(window.innerWidth);
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const filteredHistories = useMemo(() => {

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import { IconMenuDeep, IconThumbUp } from "@tabler/icons-react";
@@ -25,10 +25,14 @@ type Props = {
 
 const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, likeCount = 0, isLiked }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [clientWidth, setClientWidth] = useState(window.innerWidth);
+  const [clientWidth, setClientWidth] = useState(0);
 
   useEffect(() => {
-    setClientWidth(window.innerWidth);
+    const handleResize = () => setClientWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const scrollToSection = (id) => {

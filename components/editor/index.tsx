@@ -1,7 +1,11 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { Editor } from "@toast-ui/react-editor";
+import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js";
+
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
+import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+import "highlight.js/styles/atom-one-dark.css";
 
 import "./editor.css";
 
@@ -11,8 +15,8 @@ const MarkdownEditor = ({ onChange }: { onChange: (html: string) => void }) => {
   const handleChange = () => {
     if (editorRef.current) {
       const instance = editorRef.current.getInstance();
-      const html = instance.getHTML();
-      onChange(html);
+      const markdown = instance.getMarkdown();
+      onChange(markdown);
     }
   };
 
@@ -31,6 +35,7 @@ const MarkdownEditor = ({ onChange }: { onChange: (html: string) => void }) => {
         initialEditType="markdown"
         useCommandShortcut={true}
         onChange={handleChange}
+        plugins={[codeSyntaxHighlight]}
         toolbarItems={[
           ["heading", "bold", "italic", "strike"],
           ["hr", "quote"],

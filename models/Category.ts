@@ -38,9 +38,9 @@ const CategorySchema = new mongoose.Schema<ICategory>(
   }
 );
 
-CategorySchema.index({ name: 1, createdAt: -1 }); // 복합 쿼리에 유용
-CategorySchema.index({ name: "text" }); // 텍스트 검색
-CategorySchema.index({ id: 1 }, { unique: true }); // id가 고유하므로 name과의 조합 인덱스는 불필요
+CategorySchema.index({ name: 1, createdAt: -1 });
+CategorySchema.index({ name: "text" });
+CategorySchema.index({ id: 1 }, { unique: true });
 
 const Category = getModel<ICategory>("Category", CategorySchema);
 export default Category;

@@ -22,9 +22,9 @@ async function dbConnect() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: true,
-      maxPoolSize: 10, // 연결 풀 크기
-      serverSelectionTimeoutMS: 5000, // 서버 선택 타임아웃
-      socketTimeoutMS: 45000, // 소켓 타임아웃
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
     };
 
     cached.promise = mongoose
@@ -35,7 +35,7 @@ async function dbConnect() {
       })
       .catch((error) => {
         console.error("MongoDB connection error:", error);
-        cached.promise = null; // 연결 실패시 promise 초기화
+        cached.promise = null;
         throw error;
       });
   }
@@ -49,12 +49,10 @@ async function dbConnect() {
   }
 }
 
-// 연결 상태 모니터링
 mongoose.connection.on("connected", () => console.log("MongoDB connected"));
 mongoose.connection.on("error", (err) => console.error("MongoDB error:", err));
 mongoose.connection.on("disconnected", () => console.log("MongoDB disconnected"));
 
-// 애플리케이션 종료시 연결 정리
 process.on("SIGINT", async () => {
   await mongoose.connection.close();
   process.exit(0);

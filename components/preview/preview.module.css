@@ -9,16 +9,19 @@
   background: var(--bg-400);
   margin-bottom: 120px;
   line-height: 1.5rem;
+  color: var(--text-100) !important;
 }
 
 .preview p {
   margin: 14px 0;
+  color: var(--text-100) !important;
 }
 
 .preview h2,
 .preview h3 {
   margin-bottom: .6rem;
   padding-top: 50px;
+  color: var(--text-100) !important;
 }
 
 .preview h2 {
@@ -34,24 +37,22 @@
   padding-left: 40px;
 }
 
-
 .preview blockquote {
   margin: 1em 0 !important;
   padding-left: 1em !important;
   border-left: 4px solid var(--primary-200) !important;
   background-color: var(--bg-400) !important;
-  color: var(--text-200) !important;
   padding: 0.2em 1em !important;
 }
 
 .preview hr {
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--bg-300);
   margin: 1em 0;
 }
 
 .preview a {
-  color: #0366d6;
+  color: var(--primary-200);
   text-decoration: none;
 }
 
@@ -68,20 +69,18 @@
   border-collapse: collapse;
   width: 100%;
   margin: 1em 0;
+  color: var(--text-100);
+  background-color: var(--bg-300);
 }
 
 .preview th, .preview td {
-  border: 1px solid #ddd;
+  border: 1px solid var(--bg-200);
   padding: 6px 13px;
 }
 
 .preview th {
-  background-color: #f5f5f5;
+  background-color: var(--bg-200);
   font-weight: bold;
-}
-
-.preview li {
-  margin: 0.5em 0;
 }
 
 .storyTitle {
@@ -96,11 +95,10 @@
   padding: .05rem .25rem;
   border-radius: 4px;
   font-weight: bold;
-  color: var(--text-200);
 }
 
 .preview pre {
-  background: rgba(69, 69, 69, 0.2);;
+  background: rgba(69, 69, 69, 0.2);
   padding: 16px;
   border-radius: 8px;
 }
@@ -109,46 +107,41 @@
   background: none;
 }
 
-/* Bold */
 .preview b,
 .preview strong {
   font-weight: bold;
+  color: var(--text-100) !important;
 }
 
-/* Italic */
 .preview i,
 .preview em {
   font-style: italic;
 }
 
-/* Underline */
 .preview u {
   text-decoration: underline;
 }
 
-/* Strikethrough */
 .preview s,
 .preview strike {
   text-decoration: line-through;
+  color: var(--text-100) !important;
 }
 
-/* Link */
 .preview a {
-  color: #0645ad;
+  color: var(--primary-200);
   text-decoration: underline;
 }
 
-/* Blockquote */
 .preview blockquote {
-  border-left: 4px solid #ccc;
+  border-left: 4px solid var(--bg-200);
   margin: 1em;
   padding-left: 1em;
-  color: #666;
+  color: var(--text-200);
   font-style: italic;
-  background-color: #f9f9f9;
+  background-color: var(--bg-300);
 }
 
-/* Heading */
 .preview h1 {
   font-size: 2em;
   font-weight: bold;
@@ -185,32 +178,25 @@
   margin-bottom: 0.5em;
 }
 
-/* Unordered List (ul) */
 .preview ul {
-  list-style-type: disc; /* 기본 불릿 스타일 */
-  margin: 1em 0;         /* 위아래 여백 */
-  padding-left: 1.5em;   /* 왼쪽 여백 */
+  list-style-type: disc;
+  padding-left: 1.5em;
 }
 
-/* Ordered List (ol) */
 .preview ol {
-  list-style-type: decimal; /* 숫자형 리스트 */
-  margin: 1em 0;            /* 위아래 여백 */
-  padding-left: 1.5em;      /* 왼쪽 여백 */
+  list-style-type: decimal;
+  padding-left: 1.5em;
 }
 
-/* List Item (li) - ul과 ol의 기본 스타일 유지 */
 .preview ul li,
 .preview ol li {
-  margin: 0.5em 0;          /* 각 리스트 아이템 간 간격 */
-  line-height: 1.6;         /* 줄 간격 */
+  margin: 0.5em 0;
+  line-height: 1.6;
 }
 
-/* 중첩 리스트 스타일 */
 .preview ul ul,
 .preview ol ol,
 .preview ul ol,
 .preview ol ul {
-  list-style-type: circle; /* 중첩된 리스트는 원형 불릿 */
-  margin-left: 1.5em;      /* 추가 들여쓰기 */
+  list-style-type: circle;
 }

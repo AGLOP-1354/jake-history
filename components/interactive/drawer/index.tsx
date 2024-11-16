@@ -2,7 +2,6 @@
 
 import { useEffect, ReactNode } from "react";
 import { motion } from "framer-motion";
-// import { IconX } from "@tabler/icons-react";
 
 import classes from "./drawer.module.css";
 
