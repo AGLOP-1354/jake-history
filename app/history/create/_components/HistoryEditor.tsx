@@ -56,20 +56,25 @@ const HistoryEditor = ({ categories }: { categories: CategoryType[] }) => {
       let imageUrl = "";
 
       if (historyOptions.file) {
-        const _imageUrl = await uploadS3Image(historyOptions.file);
+        const formData = new FormData();
+        formData.append("file", historyOptions.file);
+        const _imageUrl = await uploadS3Image(formData);
         if (!_imageUrl) return;
 
         imageUrl = _imageUrl;
       }
 
+      const historyData = {
+        title: storyTitle.trim(),
+        content: content.trim(),
+        imageUrl,
+        summary: historyOptions.summary?.trim(),
+        categoryId: historyOptions.categoryId,
+      };
+
       await postFetch({
         url: "/api/history",
-        queryParams: {
-          title: storyTitle,
-          content,
-          imageUrl,
-          ...historyOptions,
-        },
+        queryParams: historyData,
       });
 
       await revalidateTags(["histories"]);

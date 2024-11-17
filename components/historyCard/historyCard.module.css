@@ -24,6 +24,7 @@
 
 .link {
   text-decoration: none;
+  flex: 1;
 }
 
 .historyImage {

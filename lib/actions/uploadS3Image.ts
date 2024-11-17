@@ -11,17 +11,18 @@ const s3 = new S3Client({
   },
 });
 
-const uploadS3Image = async (file: File) => {
+const uploadS3Image = async (formData: FormData) => {
+  const file = formData.get("file") as File;
   if (!file) return;
 
   try {
-    const buffer = await file.arrayBuffer();
+    const bytes = await file.arrayBuffer();
     const fileName = `${uuidv4()}-${file.name}`;
 
     const params = {
       Bucket: process.env.AWS_S3_BUCKET_NAME!,
       Key: fileName,
-      Body: Buffer.from(buffer),
+      Body: Buffer.from(bytes),
       ContentType: file.type,
     };
 

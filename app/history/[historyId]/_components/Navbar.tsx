@@ -17,9 +17,11 @@ type Props = {
 };
 
 const Navbar = ({ historiesByCategory, historyId }: Props) => {
+  const isClient = typeof window !== "undefined";
+
   const [searchValue, setSearchValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [clientWidth, setClientWidth] = useState(0);
+  const [clientWidth, setClientWidth] = useState(isClient ? window.innerWidth : 0);
 
   useEffect(() => {
     const handleResize = () => setClientWidth(window.innerWidth);
