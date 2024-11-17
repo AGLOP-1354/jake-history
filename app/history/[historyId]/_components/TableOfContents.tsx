@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
-import { IconMenuDeep, IconThumbUp } from "@tabler/icons-react";
+import { IconMenuDeep, IconThumbUp, IconPencil } from "@tabler/icons-react";
 
 import Divider from "@/src/components/display/divider";
 import Button from "@/src/components/interactive/button";
 import { revalidateTag } from "@/src/lib/actions/revalidTag";
 
 import classes from "../_styles/tableOfContents.module.css";
+import Link from "next/link";
 
 type Props = {
   toc: {
@@ -64,12 +65,19 @@ const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, like
   const tableOfContents = (
     <>
       <div className={classes.tableOfContentsDate}>
-        <div
-          className={classNames(classes.tableOfContentsLike, { [classes.tableOfContentsLikeActive]: isLiked })}
-          onClick={isLiked ? handleUnlike : handleLike}
-        >
-          <IconThumbUp className={classes.tableOfContentsLikeIcon} />
-          {likeCount}
+        <div className={classes.tableOfContentsLikeAndEdit}>
+          <div
+            className={classNames(classes.tableOfContentsLike, { [classes.tableOfContentsLikeActive]: isLiked })}
+            onClick={isLiked ? handleUnlike : handleLike}
+          >
+            {likeCount}
+            <IconThumbUp className={classes.tableOfContentsLikeIcon} />
+          </div>
+          <div className={classes.tableOfContentsEdit}>
+            <Link href={`/history/edit/${historyId}`}>
+              <IconPencil />
+            </Link>
+          </div>
         </div>
 
         <div className={classes.tableOfContentsDateInfo}>

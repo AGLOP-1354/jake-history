@@ -25,9 +25,17 @@ type Props = {
   historyOptions: HistoryOptionsType;
   onChangeHistoryOptions: (changedOptions: HistoryOptionsType) => void;
   categories: CategoryType[];
+  isEditMode?: boolean;
 };
 
-const HistoryOptionSetting = ({ onCancel, onSubmit, historyOptions, onChangeHistoryOptions, categories }: Props) => {
+const HistoryOptionSetting = ({
+  onCancel,
+  onSubmit,
+  historyOptions,
+  onChangeHistoryOptions,
+  categories,
+  isEditMode = false,
+}: Props) => {
   const { summary = "", categoryId = "" } = historyOptions;
   const [newCategory, setNewCategory] = useState("");
 
@@ -56,7 +64,7 @@ const HistoryOptionSetting = ({ onCancel, onSubmit, historyOptions, onChangeHist
           <div className={classes.container}>
             <h3 className={classes.title}>히스토리 미리보기</h3>
             <div className={classes.historyImagePreview}>
-              <FileUpload onFileSelect={onFileSelect} />
+              <FileUpload onFileSelect={onFileSelect} defaultFile={historyOptions.file || undefined} />
             </div>
           </div>
 
@@ -115,7 +123,7 @@ const HistoryOptionSetting = ({ onCancel, onSubmit, historyOptions, onChangeHist
               취소
             </Button>
             <Button type="primary" onClick={onSubmit}>
-              작성완료
+              {isEditMode ? "수정완료" : "작성완료"}
             </Button>
           </div>
         </div>

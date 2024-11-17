@@ -10,7 +10,13 @@ import "highlight.js/styles/atom-one-dark.css";
 
 import "./editor.css";
 
-const MarkdownEditor = ({ onChange }: { onChange: (html: string) => void }) => {
+const MarkdownEditor = ({
+  onChange,
+  initialContent,
+}: {
+  onChange: (html: string) => void;
+  initialContent?: string;
+}) => {
   const editorRef = useRef<Editor>(null);
 
   const handleChange = () => {
@@ -23,9 +29,9 @@ const MarkdownEditor = ({ onChange }: { onChange: (html: string) => void }) => {
 
   useLayoutEffect(() => {
     if (editorRef.current) {
-      editorRef.current.getInstance().setMarkdown("");
+      editorRef.current.getInstance().setMarkdown(initialContent);
     }
-  }, []);
+  }, [initialContent]);
 
   const onUploadImage = async (blob: Blob | File, callback: (url: string, alt: string) => void) => {
     try {

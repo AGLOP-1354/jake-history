@@ -1,16 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IconPhotoScan } from "@tabler/icons-react";
 import Image from "next/image";
 
 type FileUploadProps = {
   onFileSelect: (file: File) => void;
   className?: string;
+  defaultFile?: File;
 };
 
-const FileUpload = ({ onFileSelect, ...acc }: FileUploadProps) => {
+const FileUpload = ({ onFileSelect, defaultFile, ...acc }: FileUploadProps) => {
   const [preview, setPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (defaultFile) {
+      const url = URL.createObjectURL(defaultFile);
+      setPreview(url);
+      return () => URL.revokeObjectURL(url);
+    }
+  }, [defaultFile]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
