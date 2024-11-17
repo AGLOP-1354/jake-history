@@ -44,6 +44,7 @@
   font-size: 0.5rem;
   color: var(--text-200);
   text-align: center;
+  line-height: 1.2;
 }
 
 .chartContainer {
@@ -57,4 +58,21 @@
   background-color: var(--bg-200);
   padding: 1rem;
   border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .Analytics {
+    flex-direction: column;
+  }
+  .hitsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hitsItem {
+    gap: 1rem;
+  }
+
+  .hitsItemTitle {
+    font-size: 0.5rem;
+  }
 }

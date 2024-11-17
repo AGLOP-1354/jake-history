@@ -6,6 +6,7 @@ import { HistoryType } from "@/src/lib/types/history";
 
 import StatisticsPanel from "./StatisticsPanel";
 import AnalyticsCharts from "./AnalyticsCharts";
+
 import classes from "../_styles/analytics.module.css";
 
 type Props = {
@@ -31,6 +32,7 @@ const Analytics = ({ accessLogs, histories, maximumHits, maximumHitsByHistoryId 
         maximumHitsByHistoryId={maximumHitsByHistoryId}
         maximumHitsByHistoryIdTitle={maximumHitsByHistoryIdTitle}
       />
+
       <AnalyticsCharts accessLogs={accessLogs} />
     </div>
   );

@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,6 +14,8 @@ import {
 } from "chart.js";
 import { FC } from "react";
 import { Line, Bar } from "react-chartjs-2";
+
+import useViewport from "@/src/lib/hooks/useViewport";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
@@ -54,6 +55,10 @@ const hoverLinePlugin = {
 ChartJS.register(hoverLinePlugin);
 
 const Chart: FC<ChartProps> = ({ type = "line", data, options, height, width, className }) => {
+  const { isMobile } = useViewport();
+
+  const tickCallbackIndex = isMobile ? 7 : 4;
+
   const defaultOptions: ChartOptions<typeof type> = {
     responsive: true,
     interaction: {
@@ -78,7 +83,7 @@ const Chart: FC<ChartProps> = ({ type = "line", data, options, height, width, cl
           maxRotation: 0,
           minRotation: 0,
           callback: function (val, index) {
-            return index % 4 === 0 ? this.getLabelForValue(val as number) : "";
+            return index % tickCallbackIndex === 0 ? this.getLabelForValue(val as number) : "";
           },
         },
       },
