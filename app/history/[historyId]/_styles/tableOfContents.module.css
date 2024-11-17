@@ -2,11 +2,12 @@
   width: 200px;
   position: sticky;
   top: 2rem;
-  height: fit-content;
-  overflow: hidden;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  padding-bottom: 2rem;
 }
 
 .tableOfContentsLikeAndEdit {

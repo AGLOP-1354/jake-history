@@ -4,8 +4,7 @@
   margin: auto;
   min-height: calc(100svh - 56px);
   max-height: calc(100svh - 56px);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   gap: 3rem;
 }

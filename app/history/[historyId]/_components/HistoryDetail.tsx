@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 
 import Preview from "@/src/components/preview";
+import { AccessLogType } from "@/src/lib/types/accessLog";
 
 import TableOfContents from "./TableOfContents";
 
@@ -23,9 +24,20 @@ type Props = {
   updatedAt?: Date;
   likeCount: number;
   isLiked: boolean;
+  accessLogs: AccessLogType[];
 };
 
-const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, updatedAt, likeCount, isLiked }: Props) => {
+const HistoryDetail = ({
+  historyId,
+  content,
+  title,
+  imageUrl,
+  createdAt,
+  updatedAt,
+  likeCount,
+  isLiked,
+  accessLogs,
+}: Props) => {
   const [toc, setToc] = useState<tocItems>([]);
 
   useEffect(() => {
@@ -102,6 +114,7 @@ const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, updated
             style={{
               background: "var(--bg-100)",
               padding: "36px 0",
+              overflowY: "auto",
             }}
           />
         </div>
@@ -115,6 +128,7 @@ const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, updated
         ammountOfLetters={ammountOfLetters}
         likeCount={likeCount}
         isLiked={isLiked}
+        accessLogs={accessLogs}
       />
     </div>
   );

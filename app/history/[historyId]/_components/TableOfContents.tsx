@@ -2,14 +2,17 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import dayjs from "dayjs";
+import Link from "next/link";
 import { IconMenuDeep, IconThumbUp, IconPencil } from "@tabler/icons-react";
 
 import Divider from "@/src/components/display/divider";
 import Button from "@/src/components/interactive/button";
 import { revalidateTag } from "@/src/lib/actions/revalidTag";
+import { AccessLogType } from "@/src/lib/types/accessLog";
+
+import SimpleChart from "./SimpleChart";
 
 import classes from "../_styles/tableOfContents.module.css";
-import Link from "next/link";
 
 type Props = {
   toc: {
@@ -23,6 +26,7 @@ type Props = {
   likeCount: number;
   historyId: string;
   isLiked: boolean;
+  accessLogs: AccessLogType[];
 };
 
 const TableOfContents = ({
@@ -33,6 +37,7 @@ const TableOfContents = ({
   ammountOfLetters = 0,
   likeCount = 0,
   isLiked,
+  accessLogs,
 }: Props) => {
   const isClient = typeof window !== "undefined";
 
@@ -89,6 +94,10 @@ const TableOfContents = ({
               <IconPencil />
             </Link>
           </div>
+        </div>
+
+        <div className={classes.tableOfContentsAccessLogs}>
+          <SimpleChart accessLogs={accessLogs} />
         </div>
 
         <div className={classes.tableOfContentsDateInfo}>

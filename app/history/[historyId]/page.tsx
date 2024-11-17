@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getFetch, postFetch } from "@/src/lib/customFetch";
 import { getLogInfo } from "@/src/lib/utils/getLogInfo";
 import { HistoryType } from "@/src/lib/types/history";
+import { AccessLogType } from "@/src/lib/types/accessLog";
 import { getGuestToken } from "@/src/lib/utils/token";
 
 import HistoryDetail from "./_components/HistoryDetail";
@@ -51,6 +52,14 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
       },
     })) as boolean;
 
+    const accessLogs: AccessLogType[] = await getFetch({
+      url: "/api/log/one",
+      queryParams: { historyId },
+      options: {
+        cache: "no-cache",
+      },
+    });
+
     return (
       <div className={classes.HistoryDetail}>
         <Navbar historiesByCategory={historiesByCategory} historyId={historyId} />
@@ -64,6 +73,7 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
           updatedAt={updatedAt}
           likeCount={likeCount}
           isLiked={isLiked}
+          accessLogs={accessLogs}
         />
       </div>
     );
