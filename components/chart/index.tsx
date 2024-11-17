@@ -11,7 +11,6 @@ import {
   Legend,
   ChartData,
   ChartOptions,
-  TooltipItem,
 } from "chart.js";
 import { FC } from "react";
 import { Line, Bar } from "react-chartjs-2";
