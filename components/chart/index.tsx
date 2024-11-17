@@ -11,6 +11,7 @@ import {
   Legend,
   ChartData,
   ChartOptions,
+  TooltipItem,
 } from "chart.js";
 import { FC } from "react";
 import { Line, Bar } from "react-chartjs-2";
@@ -64,6 +65,18 @@ const Chart: FC<ChartProps> = ({ type = "line", data, options, height, width, cl
     interaction: {
       intersect: false,
       mode: "index",
+    },
+    plugins: {
+      tooltip: {
+        enabled: true,
+        mode: "index",
+        intersect: false,
+        callbacks: {
+          title(tooltipItems) {
+            return tooltipItems.length > 0 ? tooltipItems[0].dataset.label : "";
+          },
+        },
+      },
     },
     hover: {
       mode: "index",

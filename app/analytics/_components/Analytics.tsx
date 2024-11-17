@@ -33,7 +33,7 @@ const Analytics = ({ accessLogs, histories, maximumHits, maximumHitsByHistoryId 
         maximumHitsByHistoryIdTitle={maximumHitsByHistoryIdTitle}
       />
 
-      <AnalyticsCharts accessLogs={accessLogs} />
+      <AnalyticsCharts accessLogs={accessLogs} histories={histories} />
     </div>
   );
 };
