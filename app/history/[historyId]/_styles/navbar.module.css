@@ -21,6 +21,8 @@
   text-decoration: none;
   color: var(--text-200);
   font-size: 0.75rem;
+  line-height: 1.2;
+  padding-right: 1rem;
 }
 
 .Navbar__listItemActive {

@@ -1,0 +1,60 @@
+.Analytics {  
+  width: 100%;
+  max-height: calc(100svh - 56px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 2rem 0;
+  display: flex;
+  gap: 2rem;
+}
+
+.hitsContainer {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.hitsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: var(--bg-200);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.hitsItemTitle {
+  font-size: 0.75rem;
+  color: var(--text-200);
+}
+
+.hitsItemValue {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hitsItemDescription {
+  font-size: 0.5rem;
+  color: var(--text-200);
+  text-align: center;
+}
+
+.chartContainer {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.chartItem {
+  background-color: var(--bg-200);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}

@@ -20,11 +20,12 @@ type Props = {
   title: string;
   imageUrl?: string;
   createdAt: Date;
+  updatedAt?: Date;
   likeCount: number;
   isLiked: boolean;
 };
 
-const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, likeCount, isLiked }: Props) => {
+const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, updatedAt, likeCount, isLiked }: Props) => {
   const [toc, setToc] = useState<tocItems>([]);
 
   useEffect(() => {
@@ -65,7 +66,18 @@ const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, likeCou
   }, [content]);
 
   const ammountOfLetters = useMemo(() => {
-    const letters = content.replace(/<\/?[^>]+(>|$)/g, "").trim();
+    const letters = content
+      .replace(/\*\*(.*?)\*\*/g, "$1")
+      .replace(/\*(.*?)\*/g, "$1")
+      .replace(/`(.*?)`/g, "$1")
+      .replace(/~~(.*?)~~/g, "$1")
+      .replace(/\[(.*?)\]\(.*?\)/g, "$1")
+      .replace(/#{1,6}\s/g, "")
+      .replace(/```[\s\S]*?```/g, "")
+      .replace(/^\s*[-+*]\s/gm, "")
+      .replace(/^\s*\d+\.\s/gm, "")
+      .trim();
+
     return letters.length;
   }, [content]);
 
@@ -99,6 +111,7 @@ const HistoryDetail = ({ historyId, content, title, imageUrl, createdAt, likeCou
         historyId={historyId}
         toc={toc}
         createdAt={createdAt}
+        updatedAt={updatedAt}
         ammountOfLetters={ammountOfLetters}
         likeCount={likeCount}
         isLiked={isLiked}

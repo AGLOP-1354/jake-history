@@ -2,8 +2,9 @@ import classNames from "classnames";
 import { IconNoteOff } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { getFetch } from "@/src/lib/customFetch";
+import { getFetch, postFetch } from "@/src/lib/customFetch";
 import { HistoryType } from "@/src/lib/types/history";
+import { getLogInfo } from "@/src/lib/utils/getLogInfo";
 
 import Button from "../components/interactive/button";
 import HistoryCard from "../components/historyCard";
@@ -29,6 +30,12 @@ const Home = async ({ searchParams }: Props) => {
     url: "/api/history",
     queryParams: { sortKey: _sortKey },
     options: { next: { tags: ["histories"] } },
+  });
+
+  postFetch({
+    url: "/api/log",
+    queryParams: getLogInfo(),
+    options: { cache: "no-store" },
   });
 
   const hasHistories = !!histories && histories.length !== 0;

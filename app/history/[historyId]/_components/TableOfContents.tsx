@@ -18,13 +18,22 @@ type Props = {
     tag: string;
   }[];
   createdAt: Date;
+  updatedAt?: Date;
   ammountOfLetters: number;
   likeCount: number;
   historyId: string;
   isLiked: boolean;
 };
 
-const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, likeCount = 0, isLiked }: Props) => {
+const TableOfContents = ({
+  historyId,
+  toc,
+  createdAt,
+  updatedAt,
+  ammountOfLetters = 0,
+  likeCount = 0,
+  isLiked,
+}: Props) => {
   const isClient = typeof window !== "undefined";
 
   const [isOpen, setIsOpen] = useState(false);
@@ -62,6 +71,8 @@ const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, like
     await revalidateTag("history-by-id");
   };
 
+  const isUpdated = !!updatedAt && dayjs(updatedAt).isAfter(dayjs(createdAt));
+
   const tableOfContents = (
     <>
       <div className={classes.tableOfContentsDate}>
@@ -82,6 +93,7 @@ const TableOfContents = ({ historyId, toc, createdAt, ammountOfLetters = 0, like
 
         <div className={classes.tableOfContentsDateInfo}>
           <div>생성: {dayjs(createdAt).format("YYYY년 MM월 DD일")}</div>
+          {isUpdated && <div>수정: {dayjs(updatedAt).format("YYYY년 MM월 DD일")}</div>}
           <div>분량: {ammountOfLetters}</div>
         </div>
       </div>

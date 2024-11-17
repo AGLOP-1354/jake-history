@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames";
-import { IconBrandGithubFilled, IconEdit } from "@tabler/icons-react";
+import { IconBrandGithubFilled, IconEdit, IconTimeline } from "@tabler/icons-react";
 
 import Button from "@/src/components/interactive/button";
 import useViewport from "@/src/lib/hooks/useViewport";
@@ -39,6 +39,10 @@ const Header = () => {
         </Link>
 
         <div className={classes.headerRightItems}>
+          <Link href="/analytics" className={classNames(classes.headerRightItem, classes.analyticsLink)}>
+            <IconTimeline width="1.5rem" height="1.5rem" />
+          </Link>
+
           <Link
             href="https://github.com/AGLOP-1354"
             target="_blank"

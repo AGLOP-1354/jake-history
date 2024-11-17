@@ -70,6 +70,16 @@
   transform: scale(1.1);
 }
 
+.analyticsLink {
+  color: var(--text-100);
+  transition: transform 0.1s ease-in-out;
+}
+
+.analyticsLink:hover {
+  color: var(--accent-300);
+  transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
   .Header {
     padding-left: 0;

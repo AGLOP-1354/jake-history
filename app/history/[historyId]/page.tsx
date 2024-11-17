@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
-import { getFetch } from "@/src/lib/customFetch";
+import { getFetch, postFetch } from "@/src/lib/customFetch";
+import { getLogInfo } from "@/src/lib/utils/getLogInfo";
 import { HistoryType } from "@/src/lib/types/history";
 import { getGuestToken } from "@/src/lib/utils/token";
 
@@ -23,7 +24,9 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
   let historiesByCategory: HistoryType[] = [];
 
   try {
-    const { title, content, imageUrl, createdAt, category, likeCount }: HistoryType = await getFetch({
+    postFetch({ url: "/api/log", queryParams: { historyId, ...getLogInfo() } });
+
+    const { title, content, imageUrl, createdAt, updatedAt, category, likeCount }: HistoryType = await getFetch({
       url: "/api/history/one",
       queryParams: { id: historyId },
       options: {
@@ -58,6 +61,7 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
           title={title}
           imageUrl={imageUrl}
           createdAt={createdAt}
+          updatedAt={updatedAt}
           likeCount={likeCount}
           isLiked={isLiked}
         />

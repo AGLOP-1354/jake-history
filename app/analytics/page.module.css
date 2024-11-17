@@ -1,0 +1,9 @@
+.AnalyticsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 90vw;
+  height: calc(100svh - 56px);
+  margin: 0 auto;
+}
