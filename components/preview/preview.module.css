@@ -200,3 +200,25 @@
 .preview ol ul {
   list-style-type: circle;
 }
+
+.copyButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px;
+  background: #4a4a4a;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-100) !important;
+}
+
+.copyButton:hover {
+  background: #666;
+}
+
+/* pre 태그에 position: relative 추가 */
+.preview :global(pre) {
+  position: relative;
+}

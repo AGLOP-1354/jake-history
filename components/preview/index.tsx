@@ -42,6 +42,21 @@ const Preview = ({ content, storyTitle, onlyContent, style }: Props) => {
       codeBlocks.forEach((block) => {
         try {
           hljs.highlightElement(block as HTMLElement);
+
+          const pre = block.parentElement;
+          if (pre) {
+            const copyButton = document.createElement("button");
+            copyButton.innerHTML = "Copy";
+            copyButton.className = classes.copyButton;
+            copyButton.onclick = () => {
+              navigator.clipboard.writeText(block.textContent || "");
+              copyButton.innerHTML = "Copied!";
+              setTimeout(() => {
+                copyButton.innerHTML = "Copy";
+              }, 2000);
+            };
+            pre.appendChild(copyButton);
+          }
         } catch (error) {
           console.error("Error highlighting code block:", error);
         }
