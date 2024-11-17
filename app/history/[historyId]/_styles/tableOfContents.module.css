@@ -3,7 +3,7 @@
   position: sticky;
   top: 2rem;
   max-height: calc(100vh - 4rem);
-  overflow-y: auto;
+  /* overflow-y: auto; */
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -79,14 +79,14 @@
   align-items: flex-start;
   gap: 1rem;
   font-size: 0.75rem;
+  max-height: 50vh;
+  overflow-y: auto;
+  width: 100%;
+  padding-right: 0.5rem;
 }
 
 .tableOfContentsItem {
-  white-space: nowrap;
-  width: 200px;
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 100%;
   color: var(--text-200) !important;
 }
 
@@ -103,12 +103,10 @@
   padding: 0;
   text-align: left;
   width: 100%;
-  max-width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   cursor: pointer;
   display: block;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .tableOfContentsMobile {
