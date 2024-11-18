@@ -29,6 +29,7 @@ export default function RootLayout({ children, header }: Readonly<Props>) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <meta name="google-site-verification" content="OOGaBfkgbtNhRIz0JFKgQU6FaE0JYsSgHjMBa_BB-nY" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" />
         <title>jake history</title>
       </head>
