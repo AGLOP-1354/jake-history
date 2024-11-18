@@ -1,19 +1,40 @@
 "use server";
 
-import { getFetch } from "../customFetch";
-import { HistoryType } from "../types/history";
+import {
+  createHistory as createHistoryQuery,
+  updateHistory as updateHistoryQuery,
+} from "@/src/lib/utils/queries/historyQueries";
 
-const getHistories = async () => {
+const createHistory = async (historyData: {
+  title: string;
+  content: string;
+  imageUrl?: string;
+  categoryId?: string;
+  summary?: string;
+}) => {
   try {
-    const res: HistoryType[] = await getFetch({
-      url: "/api/history",
-    });
-
-    return res;
+    const response = await createHistoryQuery(historyData);
+    return response;
   } catch (error) {
-    console.error(error);
-    return [];
+    console.error("Error creating history:", error);
+    throw error;
   }
 };
 
-export { getHistories };
+const updateHistory = async (
+  historyId: string,
+  historyData: {
+    title: string;
+    content: string;
+  }
+) => {
+  try {
+    const response = await updateHistoryQuery(historyId, historyData);
+    return response;
+  } catch (error) {
+    console.error("Error updating history:", error);
+    throw error;
+  }
+};
+
+export { createHistory, updateHistory };

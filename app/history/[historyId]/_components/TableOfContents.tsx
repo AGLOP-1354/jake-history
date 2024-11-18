@@ -7,8 +7,8 @@ import { IconMenuDeep, IconThumbUp, IconPencil } from "@tabler/icons-react";
 
 import Divider from "@/src/components/display/divider";
 import Button from "@/src/components/interactive/button";
-import { revalidateTag } from "@/src/lib/actions/revalidTag";
 import { AccessLogType } from "@/src/lib/types/accessLog";
+import { handleLike } from "@/src/lib/actions/like";
 
 import SimpleChart from "./SimpleChart";
 
@@ -62,21 +62,8 @@ const TableOfContents = ({
     }
   };
 
-  const handleLike = async () => {
-    await fetch("/api/like", {
-      method: "POST",
-      body: JSON.stringify({ historyId }),
-    });
-    await revalidateTag("history-by-id");
-  };
-
-  const handleUnlike = async () => {
-    await fetch("/api/like", {
-      method: "PUT",
-      body: JSON.stringify({ historyId }),
-    });
-    await revalidateTag("history-by-id");
-  };
+  const _handleLike = () => handleLike(historyId, false);
+  const _handleUnlike = () => handleLike(historyId, true);
 
   const isUpdated = !!updatedAt && dayjs(updatedAt).isAfter(dayjs(createdAt));
 
@@ -86,7 +73,7 @@ const TableOfContents = ({
         <div className={classes.tableOfContentsLikeAndEdit}>
           <div
             className={classNames(classes.tableOfContentsLike, { [classes.tableOfContentsLikeActive]: isLiked })}
-            onClick={isLiked ? handleUnlike : handleLike}
+            onClick={isLiked ? _handleUnlike : _handleLike}
           >
             {likeCount}
             <IconThumbUp className={classes.tableOfContentsLikeIcon} />

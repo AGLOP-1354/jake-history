@@ -7,8 +7,8 @@ import Editor from "@/src/components/editor";
 import Preview from "@/src/components/preview";
 import Button from "@/src/components/interactive/button";
 import Drawer from "@/src/components/interactive/drawer";
-import { postFetch } from "@/src/lib/customFetch";
 import uploadS3Image from "@/src/lib/actions/uploadS3Image";
+import { createHistory, updateHistory } from "@/src/lib/actions/history";
 import { revalidateTags } from "@/src/lib/actions/revalidTag";
 import type { CategoryType } from "@/src/lib/types/category";
 import type { HistoryType } from "@/src/lib/types/history";
@@ -110,10 +110,7 @@ const HistoryEditor = ({ categories, isEditMode = false, history }: Props) => {
         categoryId: historyOptions.categoryId,
       };
 
-      await postFetch({
-        url: "/api/history",
-        queryParams: historyData,
-      });
+      await createHistory(historyData);
 
       await revalidateTags(["histories"]);
 
@@ -126,18 +123,17 @@ const HistoryEditor = ({ categories, isEditMode = false, history }: Props) => {
 
   const onUpdateHistory = async () => {
     try {
+      if (!history?.id) return;
+
       const historyData = {
-        id: history?._id,
+        id: history.id,
         title: storyTitle.trim(),
         content: content.trim(),
         summary: historyOptions.summary?.trim(),
         categoryId: historyOptions.categoryId,
       };
 
-      const updatedHistory: HistoryType = await postFetch({
-        url: "/api/history/one",
-        queryParams: historyData,
-      });
+      const updatedHistory: HistoryType = await updateHistory(history.id, historyData);
 
       if (!updatedHistory) return;
 

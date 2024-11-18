@@ -21,7 +21,7 @@ export const getUserAgent = (): string | null => {
   return headerList.get("user-agent") || null;
 };
 
-export const getLogInfo = (): Record<string, string | null> => {
+export const getLogInfo = (): { guestToken: string | null; ipAddress: string | null; userAgent: string | null } => {
   return {
     guestToken: getGuestToken(),
     ipAddress: getIpAddress(),

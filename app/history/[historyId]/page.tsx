@@ -1,15 +1,18 @@
 import { notFound } from "next/navigation";
 
-import { getFetch, postFetch } from "@/src/lib/customFetch";
+import { getHistoryById, getHistoriesByCategory } from "@/src/lib/utils/queries/historyQueries";
+import { validateLike } from "@/src/lib/utils/queries/likeQueries";
+import { insertAccessLog, getAccessLogsByHistoryId } from "@/src/lib/utils/queries/logQueries";
 import { getLogInfo } from "@/src/lib/utils/getLogInfo";
-import { HistoryType } from "@/src/lib/types/history";
-import { AccessLogType } from "@/src/lib/types/accessLog";
 import { getGuestToken } from "@/src/lib/utils/token";
+import { HistoryType } from "@/src/lib/types/history";
 
 import HistoryDetail from "./_components/HistoryDetail";
 import Navbar from "./_components/Navbar";
 
 import classes from "./page.module.css";
+
+export const fetchCache = "force-no-store";
 
 type Props = {
   params: Promise<{ historyId: string }>;
@@ -21,44 +24,31 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
     notFound();
   }
 
-  const guestToken = getGuestToken();
+  const guestToken = getGuestToken() as string;
+  const { guestToken: logGuestToken, ipAddress, userAgent } = getLogInfo();
 
   try {
-    postFetch({ url: "/api/log", queryParams: { historyId, ...getLogInfo() } });
-
-    const [historyData, isLiked, accessLogs] = await Promise.all([
-      getFetch<HistoryType>({
-        url: "/api/history/one",
-        queryParams: { id: historyId },
-        options: {
-          next: { tags: ["history-by-id"] },
-          cache: "no-cache",
-        },
-      }),
-      getFetch<boolean>({
-        url: "/api/like/validate",
-        queryParams: { historyId, guestToken },
-        options: {
-          cache: "no-cache",
-        },
-      }),
-      getFetch<AccessLogType[]>({
-        url: "/api/log/one",
-        queryParams: { historyId },
-        options: {
-          cache: "no-cache",
-        },
-      }),
-    ]);
-
-    let historiesByCategory: HistoryType[] = [];
-    if (historyData.category) {
-      historiesByCategory = (await getFetch({
-        url: "/api/history/category",
-        queryParams: { categoryId: historyData.category?._id || historyData.category },
-      })) as HistoryType[];
+    if (logGuestToken && ipAddress && userAgent) {
+      await insertAccessLog({ guestToken: logGuestToken, ipAddress, userAgent, historyId });
     }
 
+    const [historyData, likeValidation, accessLogsResponse] = await Promise.all([
+      getHistoryById(historyId),
+      validateLike(historyId, guestToken),
+      getAccessLogsByHistoryId(historyId),
+    ]);
+
+    if (!historyData) {
+      notFound();
+    }
+
+    const isLiked = typeof likeValidation === "boolean" ? likeValidation : likeValidation.success;
+    const accessLogs = Array.isArray(accessLogsResponse) ? accessLogsResponse : [];
+    const historiesByCategory = historyData.category
+      ? ((Array.isArray(await getHistoriesByCategory(historyData.category?.id || historyData.category))
+          ? await getHistoriesByCategory(historyData.category?.id || historyData.category)
+          : []) as HistoryType[])
+      : [];
     const { title, content, imageUrl, createdAt, updatedAt, likeCount } = historyData;
 
     return (
@@ -77,8 +67,7 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
         />
       </div>
     );
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  } catch {
     notFound();
   }
 };

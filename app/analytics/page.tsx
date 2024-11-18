@@ -1,34 +1,25 @@
 import { notFound } from "next/navigation";
 
-import { getFetch } from "@/src/lib/customFetch";
-import { AccessLogType, MaximumHitsType, MaximumHitsByHistoryIdType } from "@/src/lib/types/accessLog";
-import { HistoryType } from "@/src/lib/types/history";
+import { getAccessLogs, getMaximumHits } from "@/src/lib/utils/queries/analyticsQueries";
+import { getHistories } from "@/src/lib/utils/queries/historyQueries";
 import Analytics from "./_components/Analytics";
 
 import classes from "./page.module.css";
+import { AccessLogType } from "@/src/lib/types/accessLog";
 
 const AnalyticsWrapper = async () => {
-  const accessLogs: AccessLogType[] = await getFetch({
-    url: "/api/log",
-    options: { cache: "no-store" },
-  });
+  const [accessLogs, maximumData, historiesResponse] = await Promise.all([
+    getAccessLogs(),
+    getMaximumHits(),
+    getHistories(),
+  ]);
 
-  if (!accessLogs) {
+  if (!accessLogs || !maximumData || !historiesResponse.success || !historiesResponse.data) {
     notFound();
   }
 
-  const {
-    maximumHits,
-    maximumHitsByHistoryId,
-  }: {
-    maximumHits: MaximumHitsType;
-    maximumHitsByHistoryId: MaximumHitsByHistoryIdType;
-  } = await getFetch({
-    url: "/api/log/maximum",
-    options: { cache: "no-store" },
-  });
-
-  const histories: HistoryType[] = await getFetch({ url: "/api/history" });
+  const { maximumHits, maximumHitsByHistoryId } = maximumData;
+  const histories = historiesResponse.data;
 
   const accessLogsByHistoryId = accessLogs.reduce<Record<string, AccessLogType[]>>(
     (acc, log) => {

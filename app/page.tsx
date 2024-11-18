@@ -2,9 +2,9 @@ import classNames from "classnames";
 import { IconNoteOff } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { getFetch, postFetch } from "@/src/lib/customFetch";
-import { HistoryType } from "@/src/lib/types/history";
 import { getLogInfo } from "@/src/lib/utils/getLogInfo";
+import { getHistories } from "@/src/lib/utils/queries/historyQueries";
+import { insertAccessLog } from "@/src/lib/utils/queries/logQueries";
 
 import Button from "../components/interactive/button";
 import HistoryCard from "../components/historyCard";
@@ -26,17 +26,22 @@ const Home = async ({ searchParams }: Props) => {
   const { sortKey } = await searchParams;
   const _sortKey = sortKey || SORT_INFOS[0].key;
 
-  const histories: HistoryType[] = await getFetch({
-    url: "/api/history",
-    queryParams: { sortKey: _sortKey },
-    options: { next: { tags: ["histories"] } },
-  });
+  const { data: histories, error } = await getHistories(_sortKey);
 
-  postFetch({
-    url: "/api/log",
-    queryParams: getLogInfo(),
-    options: { cache: "no-store" },
-  });
+  if (error) {
+    console.error("Error fetching histories:", error);
+    throw error;
+  }
+
+  const logInfo = getLogInfo();
+  if (logInfo.guestToken && logInfo.ipAddress && logInfo.userAgent) {
+    insertAccessLog({
+      guestToken: logInfo.guestToken,
+      ipAddress: logInfo.ipAddress,
+      userAgent: logInfo.userAgent,
+      historyId: undefined,
+    });
+  }
 
   const hasHistories = !!histories && histories.length !== 0;
 
