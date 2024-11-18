@@ -27,6 +27,7 @@ type Props = {
   historyId: string;
   isLiked: boolean;
   accessLogs: AccessLogType[];
+  activeId: string;
 };
 
 const TableOfContents = ({
@@ -38,6 +39,7 @@ const TableOfContents = ({
   likeCount = 0,
   isLiked,
   accessLogs,
+  activeId,
 }: Props) => {
   const isClient = typeof window !== "undefined";
 
@@ -117,6 +119,7 @@ const TableOfContents = ({
             key={id}
             className={classNames(classes.tableOfContentsItem, {
               [classes.tableOfContentsItemH3]: tag === "H3",
+              [classes.tableOfContentsItemActive]: id === activeId,
             })}
           >
             <Button type="text" onClick={() => scrollToSection(id)}>

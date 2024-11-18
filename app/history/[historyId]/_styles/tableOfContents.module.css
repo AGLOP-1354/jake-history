@@ -95,7 +95,7 @@
 }
 
 .tableOfContentsItemH3 {
-  margin-left: 1rem;
+  padding-left: 1rem;
 }
 
 .tableOfContentsItem button {
@@ -173,4 +173,14 @@
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
+}
+
+.tableOfContentsItemActive {
+  border-left: 3px solid var(--accent-300);
+  padding-left: 0.5rem;
+}
+
+.tableOfContentsItemActive button {
+  color: var(--text-100) !important;
+  font-weight: 600;
 }

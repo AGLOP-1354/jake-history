@@ -39,6 +39,7 @@ const HistoryDetail = ({
   accessLogs,
 }: Props) => {
   const [toc, setToc] = useState<tocItems>([]);
+  const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
     const removeMarkdown = (text: string) => {
@@ -74,8 +75,31 @@ const HistoryDetail = ({
       })
       .filter((item): item is { id: string; text: string; tag: string } => item !== null);
 
+    setActiveId(tocItems[0].id);
     setToc(tocItems);
   }, [content]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-20% 0px -80% 0px",
+      }
+    );
+
+    const headings = document.querySelectorAll("h2, h3");
+    headings.forEach((heading) => observer.observe(heading));
+
+    return () => {
+      headings.forEach((heading) => observer.unobserve(heading));
+    };
+  }, [toc]);
 
   const ammountOfLetters = useMemo(() => {
     const letters = content
@@ -103,7 +127,7 @@ const HistoryDetail = ({
         <div className={classes.contentBody}>
           {!!imageUrl && (
             <div className={classes.historyDetailImage}>
-              <Image className={classes.image} src={imageUrl} alt={`${title}-image`} fill quality={100} />
+              <Image className={classes.image} src={imageUrl} alt={`${title}-image`} fill quality={100} priority />
             </div>
           )}
 
@@ -129,6 +153,7 @@ const HistoryDetail = ({
         likeCount={likeCount}
         isLiked={isLiked}
         accessLogs={accessLogs}
+        activeId={activeId}
       />
     </div>
   );
