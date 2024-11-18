@@ -22,48 +22,48 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
   }
 
   const guestToken = getGuestToken();
-  let historiesByCategory: HistoryType[] = [];
 
   try {
     postFetch({ url: "/api/log", queryParams: { historyId, ...getLogInfo() } });
 
-    const { title, content, imageUrl, createdAt, updatedAt, category, likeCount }: HistoryType = await getFetch({
-      url: "/api/history/one",
-      queryParams: { id: historyId },
-      options: {
-        next: { tags: ["history-by-id"] },
-        cache: "no-cache",
-      },
-    });
+    const [historyData, isLiked, accessLogs] = await Promise.all([
+      getFetch<HistoryType>({
+        url: "/api/history/one",
+        queryParams: { id: historyId },
+        options: {
+          next: { tags: ["history-by-id"] },
+          cache: "no-cache",
+        },
+      }),
+      getFetch<boolean>({
+        url: "/api/like/validate",
+        queryParams: { historyId, guestToken },
+        options: {
+          cache: "no-cache",
+        },
+      }),
+      getFetch<AccessLogType[]>({
+        url: "/api/log/one",
+        queryParams: { historyId },
+        options: {
+          cache: "no-cache",
+        },
+      }),
+    ]);
 
-    if (category) {
-      const _historiesByCategory = await getFetch({
+    let historiesByCategory: HistoryType[] = [];
+    if (historyData.category) {
+      historiesByCategory = (await getFetch({
         url: "/api/history/category",
-        queryParams: { categoryId: category?._id || category },
-      });
-      historiesByCategory = _historiesByCategory as HistoryType[];
+        queryParams: { categoryId: historyData.category?._id || historyData.category },
+      })) as HistoryType[];
     }
 
-    const isLiked = (await getFetch({
-      url: "/api/like/validate",
-      queryParams: { historyId, guestToken },
-      options: {
-        cache: "no-cache",
-      },
-    })) as boolean;
-
-    const accessLogs: AccessLogType[] = await getFetch({
-      url: "/api/log/one",
-      queryParams: { historyId },
-      options: {
-        cache: "no-cache",
-      },
-    });
+    const { title, content, imageUrl, createdAt, updatedAt, likeCount } = historyData;
 
     return (
       <div className={classes.HistoryDetail}>
         <Navbar historiesByCategory={historiesByCategory} historyId={historyId} />
-
         <HistoryDetail
           historyId={historyId}
           content={content}
