@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Jake History",
   description: "Developer's Personal Blog and Records",
   verification: {
-    google: "OOGaBfkgbtNhRIz0JFKgQU6FaE0JYsSgHjMBa_BB-nY",
+    google: "BVoYzv4F0_DZfKPHAbx4D-NhZ9TLxr_KYqxwzevCSAU",
   },
 };
 
