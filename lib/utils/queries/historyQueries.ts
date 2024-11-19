@@ -1,33 +1,44 @@
 import { cookies } from "next/headers";
 import dayjs from "dayjs";
+import { unstable_cache } from "next/cache";
 
 import { createClient } from "../supabase/server";
 
 export async function getHistories(sortKey: string = "latest") {
   const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
 
-  try {
-    const { data, error } = await supabase
-      .from("history")
-      .select(
-        `
-        *,
-        category:category(
-          id,
-          name,
-          color
-        )
-      `
-      )
-      .order(sortKey === "latest" ? "createdAt" : "title", { ascending: sortKey === "name" });
+  return unstable_cache(
+    async (cookieStore) => {
+      const supabase = createClient(cookieStore);
 
-    if (error) throw error;
-    return { data, success: true };
-  } catch (error) {
-    console.error("Error fetching histories:", error);
-    return { success: false, error };
-  }
+      try {
+        const { data, error } = await supabase
+          .from("history")
+          .select(
+            `
+            *,
+            category:category(
+              id,
+              name,
+              color
+            )
+          `
+          )
+          .order(sortKey === "latest" ? "createdAt" : "title", { ascending: sortKey === "name" });
+
+        if (error) throw error;
+        return { data, success: true };
+      } catch (error) {
+        console.error("Error fetching histories:", error);
+        return { success: false, error };
+      }
+    },
+    ["histories", sortKey],
+    {
+      revalidate: 3600, // 1시간마다 재검증
+      tags: ["histories"],
+    }
+  )(cookieStore);
 }
 
 export const getHistoryById = async (id: string) => {

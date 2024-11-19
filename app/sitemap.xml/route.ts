@@ -18,7 +18,6 @@ export async function GET() {
     changefreq: "weekly",
     priority: "0.7",
   }));
-  console.log("historyUrls", historyUrls);
 
   const urls = [...staticUrls, ...(historyUrls || [])];
 

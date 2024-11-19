@@ -9,6 +9,7 @@ import Divider from "@/src/components/display/divider";
 import Button from "@/src/components/interactive/button";
 import { AccessLogType } from "@/src/lib/types/accessLog";
 import { handleLike } from "@/src/lib/actions/like";
+import { CREATABLE_IP_ADDRESS } from "@/src/lib/constants/creatableIpAdress";
 
 import SimpleChart from "./SimpleChart";
 
@@ -28,6 +29,7 @@ type Props = {
   isLiked: boolean;
   accessLogs: AccessLogType[];
   activeId: string;
+  ipAddress: string | null;
 };
 
 const TableOfContents = ({
@@ -40,6 +42,7 @@ const TableOfContents = ({
   isLiked,
   accessLogs,
   activeId,
+  ipAddress,
 }: Props) => {
   const isClient = typeof window !== "undefined";
 
@@ -78,11 +81,13 @@ const TableOfContents = ({
             {likeCount}
             <IconThumbUp className={classes.tableOfContentsLikeIcon} />
           </div>
-          <div className={classes.tableOfContentsEdit}>
-            <Link href={`/history/edit/${historyId}`}>
-              <IconPencil />
-            </Link>
-          </div>
+          {CREATABLE_IP_ADDRESS.includes(ipAddress || "") && (
+            <div className={classes.tableOfContentsEdit}>
+              <Link href={`/history/edit/${historyId}`}>
+                <IconPencil />
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className={classes.tableOfContentsAccessLogs}>

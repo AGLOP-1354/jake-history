@@ -25,6 +25,7 @@ type Props = {
   likeCount: number;
   isLiked: boolean;
   accessLogs: AccessLogType[];
+  ipAddress: string | null;
 };
 
 const HistoryDetail = ({
@@ -37,6 +38,7 @@ const HistoryDetail = ({
   likeCount,
   isLiked,
   accessLogs,
+  ipAddress,
 }: Props) => {
   const [toc, setToc] = useState<tocItems>([]);
   const [activeId, setActiveId] = useState<string>("");
@@ -154,6 +156,7 @@ const HistoryDetail = ({
         isLiked={isLiked}
         accessLogs={accessLogs}
         activeId={activeId}
+        ipAddress={ipAddress}
       />
     </div>
   );

@@ -64,6 +64,7 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
           likeCount={likeCount}
           isLiked={isLiked}
           accessLogs={accessLogs}
+          ipAddress={ipAddress}
         />
       </div>
     );
