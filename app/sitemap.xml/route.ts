@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getHistories } from "@/src/lib/utils/queries/historyQueries";  // Prisma 클라이언트 import
+import { getHistories } from "@/src/lib/utils/queries/historyQueries"; // Prisma 클라이언트 import
 
 export async function GET() {
   const baseUrl = "https://jake-history.vercel.app";
@@ -15,11 +15,11 @@ export async function GET() {
   ];
 
   // history URLs 생성
-  const historyUrls = histories?.data?.map(history => ({
+  const historyUrls = histories?.data?.map((history) => ({
     loc: `${baseUrl}/history/${history.id}`,
-    lastmod: history.updatedAt.toISOString().split('T')[0],  // YYYY-MM-DD 형식
+    lastmod: history.updatedAt.toISOString().split("T")[0], // YYYY-MM-DD 형식
     changefreq: "weekly",
-    priority: "0.7"
+    priority: "0.7",
   }));
 
   // 모든 URLs 합치기
