@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://jake-history.vercel.app/
-
-# Sitemaps
-Sitemap: https://jake-history.vercel.app/sitemap.xml
