@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jake-history.vercel.app/sitemap.xml
