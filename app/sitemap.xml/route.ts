@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getHistories } from "@/src/lib/utils/queries/historyQueries"; // Prisma 클라이언트 import
+import dayjs from "dayjs";
 
 export async function GET() {
   const baseUrl = "https://jake-history.vercel.app";
@@ -13,7 +14,7 @@ export async function GET() {
 
   const historyUrls = histories?.data?.map((history) => ({
     loc: `${baseUrl}/history/${history.id}`,
-    lastmod: history.updatedAt.toISOString().split("T")[0],
+    lastmod: dayjs(history.updatedAt).format("YYYY-MM-DD"),
     changefreq: "weekly",
     priority: "0.7",
   }));
