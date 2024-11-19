@@ -44,6 +44,5 @@
     "react": {
       "version": "detect"
     }
-  },
-  "ignorePatterns": ["next-sitemap.config.js"]
+  }
 }
