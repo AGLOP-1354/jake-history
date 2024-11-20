@@ -17,6 +17,9 @@ export const fetchCache = "default-cache";
 export const metadata: Metadata = {
   title: "Jake History",
   description: "Developer's Personal Blog and Records",
+  icons: {
+    icon: "/favicon.ico",
+  },
   verification: {
     google: "BVoYzv4F0_DZfKPHAbx4D-NhZ9TLxr_KYqxwzevCSAU",
   },
