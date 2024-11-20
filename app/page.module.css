@@ -1,11 +1,12 @@
 .Wrapper {
   position: relative;
   height: calc(100svh - 56px);
+  overflow-y: auto;
 }
 
 .Home {
-  max-width: 90rem;
-  width: 90rem;
+  max-width: 90vw;
+  width: 90vw;
   padding: 36px;
   margin: auto;
 }
