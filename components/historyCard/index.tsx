@@ -14,10 +14,18 @@ const HistoryCard = ({ id, title, imageUrl, summary, createdAt, content, categor
 
   return (
     <div className={classes.HistoryCard}>
-      <Link href={`/history/${id}`} className={classes.link}>
+      <Link href={`/history/${id}`} className={classes.link} prefetch>
         <div className={classes.historyImage}>
           {imageUrl ? (
-            <Image quality={100} src={imageUrl} alt={`${title} 이미지`} fill className={classes.image} />
+            <Image
+              quality={75}
+              src={imageUrl}
+              alt={`${title} 이미지`}
+              fill
+              className={classes.image}
+              priority={isRecentHistory}
+              loading={isRecentHistory ? "eager" : "lazy"}
+            />
           ) : (
             <div className={classes.noHistoryImage}>
               <IconPhotoScan width={128} height={128} />

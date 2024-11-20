@@ -5,14 +5,11 @@ import { validateLike } from "@/src/lib/utils/queries/likeQueries";
 import { insertAccessLog, getAccessLogsByHistoryId } from "@/src/lib/utils/queries/logQueries";
 import { getLogInfo } from "@/src/lib/utils/getLogInfo";
 import { getGuestToken } from "@/src/lib/utils/token";
-import { HistoryType } from "@/src/lib/types/history";
 
 import HistoryDetail from "./_components/HistoryDetail";
 import Navbar from "./_components/Navbar";
 
 import classes from "./page.module.css";
-
-export const fetchCache = "force-no-store";
 
 type Props = {
   params: Promise<{ historyId: string }>;
@@ -32,23 +29,21 @@ const HistoryDetailWrapper = async ({ params }: Props) => {
       await insertAccessLog({ guestToken: logGuestToken, ipAddress, userAgent, historyId });
     }
 
-    const [historyData, likeValidation, accessLogsResponse] = await Promise.all([
-      getHistoryById(historyId),
-      validateLike(historyId, guestToken),
-      getAccessLogsByHistoryId(historyId),
-    ]);
-
+    const historyData = await getHistoryById(historyId);
     if (!historyData) {
       notFound();
     }
 
+    const { category } = historyData;
+    const [likeValidation, accessLogsResponse, categorizedHistories] = await Promise.all([
+      validateLike(historyId, guestToken),
+      getAccessLogsByHistoryId(historyId),
+      category ? getHistoriesByCategory(category.id || category) : Promise.resolve([]),
+    ]);
+
     const isLiked = typeof likeValidation === "boolean" ? likeValidation : likeValidation.success;
     const accessLogs = Array.isArray(accessLogsResponse) ? accessLogsResponse : [];
-    const historiesByCategory = historyData.category
-      ? ((Array.isArray(await getHistoriesByCategory(historyData.category?.id || historyData.category))
-          ? await getHistoriesByCategory(historyData.category?.id || historyData.category)
-          : []) as HistoryType[])
-      : [];
+    const historiesByCategory = Array.isArray(categorizedHistories) ? categorizedHistories : [];
     const { title, content, imageUrl, createdAt, updatedAt, likeCount } = historyData;
 
     return (
